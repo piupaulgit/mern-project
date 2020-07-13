@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/signout", (req, res) => {
-  res.send("signing out");
+  res.send("I am signing out");
 });
 
 module.exports = router;
