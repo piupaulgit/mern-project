@@ -1,11 +1,40 @@
-const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
+const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const port = 3000;
+// routes
+const authRoutes = require("./routes/auth");
 
-app.get("/", (req, res) => res.send("hello Piu"));
+// db connection
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log("BD connected");
+  })
+  .catch(() => {
+    console.log("something went wrong");
+  });
 
+// middlewares
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
+
+// port
+const port = process.env.PORT || 3000;
+
+// my routes
+app.use("/api", authRoutes);
+
+// starting server
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
