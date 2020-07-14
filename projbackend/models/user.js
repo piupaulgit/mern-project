@@ -9,13 +9,13 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: true,
-      maxLength: 30,
+      maxlength: 30,
       trim: true,
     },
     lastName: {
       type: String,
       required: true,
-      maxLength: 30,
+      maxlength: 30,
       trim: true,
     },
     email: {
@@ -57,7 +57,7 @@ userSchema
   });
 
 // method
-userSchema.method = {
+userSchema.methods = {
   authenticate: function (plainPassword) {
     return this.securePassword(plainPassword) === this.encry_password;
   },
