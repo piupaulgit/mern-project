@@ -10,18 +10,18 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 
 // db connection
-// mongoose
-//   .connect(process.env.DATABASE, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//   })
-//   .then(() => {
-//     console.log("BD connected");
-//   })
-//   .catch(() => {
-//     console.log("something went wrong");
-//   });
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log("BD connected");
+  })
+  .catch(() => {
+    console.log("something went wrong");
+  });
 
 // middlewares
 app.use(bodyParser.json());
