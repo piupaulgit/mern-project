@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const { validationResult } = require("express-validator");
 
+// signup controller
 exports.signup = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -21,6 +22,9 @@ exports.signup = (req, res) => {
   });
 };
 
+// signin controller
+exports.signin = (req, res) => {};
+// signout controller
 exports.signout = (req, res) => {
   res.send("I am signing out now");
 };
