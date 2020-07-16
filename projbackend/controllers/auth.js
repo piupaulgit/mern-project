@@ -28,38 +28,39 @@ exports.signup = (req, res) => {
 // signin controller
 exports.signin = (req, res) => {
   const { email, password } = req.body;
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({
       error: errors.array()[0].msg,
     });
   }
-  User.findOne({ email }),
-    (req, res) => {
-      if (err) {
-        res.status(400).json({
-          error: "User email not found is database",
-        });
-      }
 
-      if (!User.authenticate(password)) {
-        return res.status(401).json({
-          error: "Email password does not match",
-        });
-      }
-
-      // create token
-      const token = jwt.sign({ _id: user._id }, process.env.SECRETKEY);
-      // put token in cookie
-      res.cookie("token", token);
-
-      // send response to frontend
-      const { _id, name, email, role } = user;
-      res.json({
-        token,
-        user: { _id, name, email, role },
+  User.findOne({ email }, (err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: "User email not found is database",
       });
-    };
+    }
+
+    if (!user.authenticate(password)) {
+      return res.status(401).json({
+        error: "Email password does not match",
+      });
+    }
+
+    // create token
+    const token = jwt.sign({ _id: user._id }, process.env.SECRETKEY);
+    // put token in cookie
+    res.cookie("token", token);
+
+    // send response to frontend
+    const { _id, name, email, role } = user;
+    res.json({
+      token,
+      user: { _id, name, email, role },
+    });
+  });
 };
 // signout controller
 exports.signout = (req, res) => {
