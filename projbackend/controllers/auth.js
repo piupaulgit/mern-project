@@ -75,3 +75,25 @@ exports.isSignedIn = expressJwt({
   userProperty: "auth",
   algorithms: ["HS256"],
 });
+
+// is authenticated
+exports.isAuthenticated = (req, res, next) => {
+  const checker = req.profile && req.auth && req.auth._id === req.profile._id;
+  if (!checker) {
+    return res.status(403).json({
+      message: "access denied",
+    });
+  }
+  next();
+};
+
+// is admin
+exports.isAdmin = (req, res, next) => {
+  if (req.profile.role === 0) {
+    return res.status(403).json({
+      message: "you are not admin",
+    });
+  }
+
+  next();
+};
