@@ -2,7 +2,6 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 const expressJwt = require("express-jwt");
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
 
 // signup controller
 exports.signup = (req, res) => {
@@ -69,3 +68,10 @@ exports.signout = (req, res) => {
     message: "User signout successfull",
   });
 };
+
+// is signedin checking
+exports.isSignedIn = expressJwt({
+  secret: process.env.SECRETKEY,
+  userProperty: "auth",
+  algorithms: ["HS256"],
+});
