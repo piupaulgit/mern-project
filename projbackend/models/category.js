@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 const { schema } = require("./user");
 const Schema = mongoose.Schema;
 
-const CategorySchema = new schema(
+const CategorySchema = new Schema(
   {
     name: {
       type: String,
       trim: true,
       unique: true,
+      required: true
     },
   },
   { timestamps: true }
