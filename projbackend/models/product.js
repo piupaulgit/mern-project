@@ -26,7 +26,7 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: ObjectId,
       ref: "Categoty",
-      required: TextTrackCue,
+      required: true,
     },
     stock: {
       type: Number,
