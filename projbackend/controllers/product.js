@@ -29,7 +29,15 @@ exports.createProduct = (req, res) => {
       });
     }
 
+    const { name, description, category, price, stock } = fields;
+    if (!name || !description || !category || !price || !stock) {
+      return res.status(400).json({
+        error: "Please fill all the inputs",
+      });
+    }
+
     let product = new Product(fields);
+
     if (file.photo) {
       if (file.photo.size > 3000000) {
         return res.status(400).json({
@@ -43,7 +51,7 @@ exports.createProduct = (req, res) => {
     product.save((err, product) => {
       if (err) {
         return res.status(400).json({
-          error: "somehting wrong",
+          error: err,
         });
       }
       res.json(product);

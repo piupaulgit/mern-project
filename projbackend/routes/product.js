@@ -8,7 +8,7 @@ const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 router.param("userId", getUserById);
 router.param("productId", getProductById);
 router.post(
-  "/product/create/userId",
+  "/product/create/:userId",
   isSignedIn,
   isAuthenticated,
   isAdmin,
