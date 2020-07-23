@@ -14,3 +14,7 @@ exports.getProductById = (req, res, next, id) => {
       next();
     });
 };
+
+exports.createProduct = (req, res) => {
+  console.log("tes");
+};
