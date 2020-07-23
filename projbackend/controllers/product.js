@@ -1,5 +1,8 @@
 const Product = require("../models/product");
 const { json } = require("body-parser");
+const formidable = require("formidable");
+const _ = require("lodash");
+const fs = require("fs");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
@@ -16,5 +19,34 @@ exports.getProductById = (req, res, next, id) => {
 };
 
 exports.createProduct = (req, res) => {
-  console.log("tes");
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+
+  form.parse(req, (err, fields, file) => {
+    if (err) {
+      return res.status(400).json({
+        error: "something wrong with file",
+      });
+    }
+
+    let product = new Product(fields);
+    if (file.photo) {
+      if (file.photo.size > 3000000) {
+        return res.status(400).json({
+          error: "file size too big",
+        });
+      }
+      product.photo.data = fs.readFileSync(file.photo.path);
+      product.photo.contentType = file.photo.type;
+    }
+
+    product.save((err, product) => {
+      if (err) {
+        return res.status(400).json({
+          error: "somehting wrong",
+        });
+      }
+      res.json(product);
+    });
+  });
 };
