@@ -3,6 +3,7 @@ const { json } = require("body-parser");
 const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
+const product = require("../models/product");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
@@ -120,4 +121,22 @@ exports.removeProduct = (req, res) => {
       message: "product successfully deleted",
     });
   });
+};
+
+exports.getAllproducts = (req, res) => {
+  const limit = res.query.limit ? parseInt(res.query.limit) : 10;
+  const sortBy = res.query.sortBy ? res.query.sortBy : "_id";
+  product
+    .find()
+    .select("-photo")
+    .sort([[sortBy, "asc"]])
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "no product found",
+        });
+      }
+      res.json(products);
+    });
 };
