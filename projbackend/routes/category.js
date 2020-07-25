@@ -11,8 +11,6 @@ const {
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const router = express.Router();
 
-module.exports = router;
-
 // params
 router.param("userId", getUserById);
 router.param("categoryId", getCategoryById);
@@ -42,3 +40,5 @@ router.delete(
   isAdmin,
   removeCategory
 );
+
+module.exports = router;
