@@ -10,6 +10,7 @@ const {
   updateProduct,
   removeProduct,
   getAllproducts,
+  getUniqueCategories,
 } = require("../controllers/product");
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 
@@ -50,4 +51,6 @@ router.delete(
 // listing route
 router.get("/product", getAllproducts);
 
+// get unique categories
+router.get("/product/category", getUniqueCategories);
 module.exports = router;

@@ -4,6 +4,7 @@ const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
 const product = require("../models/product");
+const { runInNewContext } = require("vm");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
@@ -66,11 +67,12 @@ exports.getProduct = (req, res) => {
   return res.json(req.product);
 };
 
-exports.photo = (req, res) => {
+exports.photo = (req, res, next) => {
   if (req.product.photo.data) {
     res.set("content-Type", req.product.photo.contentType);
     return res.json(req.product.photo.data);
   }
+  next();
 };
 
 exports.updateProduct = (req, res) => {
@@ -139,4 +141,35 @@ exports.getAllproducts = (req, res) => {
       }
       res.json(products);
     });
+};
+
+// update product stock and sold count
+exports.updateStock = (req, res, next) => {
+  myOperations = req.body.order.products.map((prod) => {
+    return {
+      updateOne: {
+        filter: { _id: prod._id },
+        update: { $inc: { stock: -prod.count, sold: +prod.count } },
+      },
+    };
+    product.bulkWrite(myOperations, {}, (err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "bulk operation failed",
+        });
+      }
+      next();
+    });
+  });
+};
+
+exports.getUniqueCategories = (req, res) => {
+  Product.distinct("category", {}, (err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: "no categories found",
+      });
+    }
+    res.json(category);
+  });
 };
