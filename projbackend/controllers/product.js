@@ -58,3 +58,66 @@ exports.createProduct = (req, res) => {
     });
   });
 };
+
+// get single product
+exports.getProduct = (req, res) => {
+  req.product.photo = undefined;
+  return res.json(req.product);
+};
+
+exports.photo = (req, res) => {
+  if (req.product.photo.data) {
+    res.set("content-Type", req.product.photo.contentType);
+    return res.json(req.product.photo.data);
+  }
+};
+
+exports.updateProduct = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+
+  form.parse(req, (err, fields, file) => {
+    if (err) {
+      return res.status(400).json({
+        error: "something wrong with file",
+      });
+    }
+
+    // update product is happening here
+    let product = req.product;
+    product = _.extend(product, fields);
+
+    if (file.photo) {
+      if (file.photo.size > 3000000) {
+        return res.status(400).json({
+          error: "updatetion photo failed",
+        });
+      }
+      product.photo.data = fs.readFileSync(file.photo.path);
+      product.photo.contentType = file.photo.type;
+    }
+
+    product.save((err, product) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      }
+      res.json(product);
+    });
+  });
+};
+
+exports.removeProduct = (req, res) => {
+  const product = req.product;
+  product.remove((err, product) => {
+    if (err) {
+      return res.status(400).json({
+        error: "product unable to delete",
+      });
+    }
+    res.json({
+      message: "product successfully deleted",
+    });
+  });
+};
