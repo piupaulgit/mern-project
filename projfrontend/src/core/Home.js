@@ -1,13 +1,13 @@
 import React from "react";
 import { API } from "../backend";
+import Base from "./Base";
 
 const Home = () => {
-    console.log(API)
-    return (
-        <div>
-            <h1>Welcome Home {API}</h1>
-        </div>
-    )
-}
+  return (
+    <Base title="Home page">
+      <h1>main content</h1>
+    </Base>
+  );
+};
 
 export default Home;
