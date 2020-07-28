@@ -43,12 +43,25 @@ const Menu = ({ history }) => {
             Admin dashboard
           </Link>
         </li>
+        <li className="nav-item">
+          <Link
+            to="/signup"
+            className="nav-link"
+            style={currentLink(history, "/signup")}
+          >
+            Signup
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/signin"
+            className="nav-link"
+            style={currentLink(history, "/signin")}
+          >
+            Signin
+          </Link>
+        </li>
       </ul>
-      <div className="ml-auto">
-        <Link className="btn btn-light mr-2">Signup</Link>
-        <Link className="btn btn-light mr-2">Signin</Link>
-        <Link className="btn btn-light">sign out</Link>
-      </div>
     </nav>
   );
 };
