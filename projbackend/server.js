@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(cors());
 
 // port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 // my routes
 app.use("/api", authRoutes);
