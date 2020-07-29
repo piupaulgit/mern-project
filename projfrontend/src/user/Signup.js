@@ -81,8 +81,37 @@ const Signup = () => {
       </form>
     );
   };
+
+  const successMessage = () => {
+    return (
+      <div
+        className="alert alert-success"
+        style={{ display: success ? "" : "none" }}
+      >
+        New Account successfully.
+        <Link to="/signin">Login now</Link>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div
+        className="alert alert-danger"
+        style={{ display: error ? "" : "none" }}
+      >
+        Something went wrong.
+      </div>
+    );
+  };
   return (
     <Base title="Register Now">
+      <div className="row">
+        <div className="col-md-5 p-0 mx-auto">
+          {successMessage()}
+          {errorMessage()}
+        </div>
+      </div>
       <div className="row py-4">
         <div className="col-md-5 mx-auto border p-3 mb-4 ">
           <h1 className="display-5 font-weight-light mb-2">Register</h1>
