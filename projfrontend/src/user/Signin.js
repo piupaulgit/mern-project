@@ -3,14 +3,31 @@ import { Link } from "react-router-dom";
 import Base from "../core/Base";
 
 const Signin = () => {
+  const signupIn = () => {
+    return (
+      <form>
+        <div className="form-group">
+          <label>Email</label>
+          <input type="email" className="form-control"></input>
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input type="password" className="form-control"></input>
+        </div>
+        <input
+          type="submit"
+          className="btn btn-primary btn-block"
+          value="Register"
+        ></input>
+      </form>
+    );
+  };
   return (
-    <Base title="Login to your account">
-      <div className="row">
-        <div className="col-md-5 mx-auto border p-3">
+    <Base title="Login to Your Account">
+      <div className="row py-4">
+        <div className="col-md-5 mx-auto border p-3 mb-4 ">
           <h1 className="display-5 font-weight-light mb-2">Login</h1>
-          <div className="form-group">
-            <input type="text" className="form-control" />
-          </div>
+          {signupIn()}
         </div>
       </div>
     </Base>
