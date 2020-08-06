@@ -73,11 +73,14 @@ const Signin = () => {
 
   const performRedirect = () => {
     if (didDirect) {
-      if ((user, user.role === 1)) {
-        console.log("redirect to admin dashborad");
+      if (user && user.role === 1) {
+        return <Redirect to="/admin/dashboard"></Redirect>;
       } else {
-        console.log("redirect to user dashboard");
+        return <Redirect to="/user/dashboard"></Redirect>;
       }
+    }
+    if (isAuthenticated()) {
+      return <Redirect to="/"></Redirect>;
     }
   };
   const successMessage = () => {

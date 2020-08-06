@@ -26,24 +26,29 @@ const Menu = ({ history }) => {
             Cart
           </Link>
         </li>
-        <li className="nav-item">
-          <Link
-            to="/"
-            className="nav-link"
-            style={currentLink(history, "dashboard")}
-          >
-            dashboard
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
-            to="/"
-            className="nav-link"
-            style={currentLink(history, "adminDashboard")}
-          >
-            Admin dashboard
-          </Link>
-        </li>
+        {isAuthenticated() && isAuthenticated().user.role === 0 && (
+          <li className="nav-item">
+            <Link
+              to="/user/dashboard"
+              className="nav-link"
+              style={currentLink(history, "/user/dashboard")}
+            >
+              dashboard
+            </Link>
+          </li>
+        )}
+
+        {isAuthenticated() && isAuthenticated().user.role === 1 && (
+          <li className="nav-item">
+            <Link
+              to="/admin/dashboard"
+              className="nav-link"
+              style={currentLink(history, "/admin/dashboard")}
+            >
+              Admin dashboard
+            </Link>
+          </li>
+        )}
         {!isAuthenticated() && (
           <React.Fragment>
             <li className="nav-item">
