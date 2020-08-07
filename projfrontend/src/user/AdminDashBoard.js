@@ -1,18 +1,25 @@
 import React from "react";
 import Base from "../core/Base";
 import { isAuthenticated } from "../auth/helper";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const {
+    user: { name, email, role },
+  } = isAuthenticated();
+
   const leftSidebar = () => {
     return (
       <ul class="list-group">
         <li class="list-group-item bg-dark text-white font-weight-bold">
           Admin Menus
         </li>
-        <li class="list-group-item">Category</li>
-        <li class="list-group-item">product</li>
-        <li class="list-group-item">Products</li>
-        <li class="list-group-item">Orders</li>
+        <li class="list-group-item">
+          <Link to="/admin/create/category">Create Category</Link>
+        </li>
+        <li class="list-group-item">Create Product</li>
+        <li class="list-group-item">Manage Products</li>
+        <li class="list-group-item">Manage Orders</li>
       </ul>
     );
   };
@@ -20,7 +27,7 @@ const AdminDashboard = () => {
   const rightContent = () => {
     return (
       <div>
-        <h3 className="text-white">Hi! {isAuthenticated().user.name}</h3>
+        <h3 className="text-white">Hi! {name}</h3>
       </div>
     );
   };
