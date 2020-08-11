@@ -1,20 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
+import { getCategories } from "./helper/adminapicall";
 
 const AddProduct = () => {
+  useEffect(() => {
+    preLoad();
+  }, []);
   const [values, setValues] = useState({
     name: "",
     description: "",
     photo: "",
     price: "",
     quantity: "",
+    categories: [],
     category: "",
     stock: "",
+    createdproduct: "",
+    formData: "",
   });
 
-  const { name, description, price, photo, quantity, stock, category } = values;
-  const handleChange = (name) => (evnt) => {};
+  const {
+    name,
+    description,
+    price,
+    photo,
+    quantity,
+    stock,
+    category,
+    createdproduct,
+    categories,
+    formData,
+  } = values;
+
+  const preLoad = () => {
+    getCategories()
+      .then((res) => {
+        if (res.error) {
+          console.log(res.error);
+        } else {
+          setValues({
+            ...values,
+            categories: res,
+            formData: new FormData(),
+          });
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleChange = (name) => (evnt) => {
+    const value = name === "photo" ? evnt.target.file : evnt.target.value;
+    formData.set(name, value);
+    setValues({ ...value, [name]: value });
+    console.log(formData);
+  };
   const onSubmit = () => {};
   const createProductForm = () => {
     return (
@@ -65,8 +107,14 @@ const AddProduct = () => {
             placeholder="Category"
           >
             <option>Select</option>
-            <option value="a">a</option>
-            <option value="b">b</option>
+            {categories &&
+              categories.map((cat, index) => {
+                return (
+                  <option key={index} value={cat._id}>
+                    {cat.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="form-group">
