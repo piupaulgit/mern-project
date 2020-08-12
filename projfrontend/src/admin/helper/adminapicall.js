@@ -38,17 +38,14 @@ export const addProduct = (userId, token, product) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: product,
   })
-    .then((res) => {
-      return res.json();
+    .then((response) => {
+      return response.json();
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 // get products
