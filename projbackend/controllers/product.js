@@ -126,8 +126,8 @@ exports.removeProduct = (req, res) => {
 };
 
 exports.getAllproducts = (req, res) => {
-  const limit = res.query.limit ? parseInt(res.query.limit) : 10;
-  const sortBy = res.query.sortBy ? res.query.sortBy : "_id";
+  const limit = req.query.limit ? parseInt(res.query.limit) : 10;
+  const sortBy = req.query.sortBy ? res.query.sortBy : "_id";
   product
     .find()
     .select("-photo")
