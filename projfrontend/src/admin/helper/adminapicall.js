@@ -95,19 +95,16 @@ export const updateProduct = (userId, token, productId, product) => {
 
 // delete product
 
-export const deleteProduct = (userId, token, productId, product) => {
+export const deleteProduct = (userId, token, productId) => {
   return fetch(`${API}/product/${productId}/${userId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((res) => {
-      return res.json();
+    .then((response) => {
+      return response.json();
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getProducts } from "./helper/adminapicall";
+import { getProducts, deleteProduct } from "./helper/adminapicall";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -21,6 +21,19 @@ const ManageProducts = () => {
         setProducts(data);
       }
     });
+  };
+  const deleteThisProduct = (productId) => {
+    deleteProduct(user._id, token, productId)
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          preLoad();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <Base titlt="Manage Product">
@@ -42,9 +55,13 @@ const ManageProducts = () => {
                         </Link>
                       </td>
                       <td>
-                        <Link to="/" className="btn btn-danger">
+                        <button
+                          to="/"
+                          className="btn btn-danger"
+                          onClick={() => deleteThisProduct(item._id)}
+                        >
                           Delete
-                        </Link>
+                        </button>
                       </td>
                     </tr>
                   );

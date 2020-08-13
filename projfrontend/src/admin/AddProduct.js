@@ -167,7 +167,7 @@ const AddProduct = () => {
   );
 
   return (
-    <Base titlt="Add Product">
+    <Base title="Add A  Product">
       <div className="container bg-info p-4 my-4">
         <div className="row p-4">
           <div className="col-md-5 mx-auto">
