@@ -50,7 +50,10 @@ const ManageProducts = () => {
                     <tr key={index}>
                       <td>{item.name}</td>
                       <td>
-                        <Link to="/" className="btn btn-success">
+                        <Link
+                          to={`/admin/product/${item._id}`}
+                          className="btn btn-success"
+                        >
                           Update
                         </Link>
                       </td>

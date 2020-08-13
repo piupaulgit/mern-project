@@ -63,7 +63,7 @@ export const getProducts = () => {
 
 // get single product
 export const getProduct = (productId) => {
-  return fetch(`${API}/product/photo/${productId}`, {
+  return fetch(`${API}/product/${productId}`, {
     method: "GET",
   })
     .then((res) => {
