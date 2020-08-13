@@ -8,8 +8,8 @@ const { runInNewContext } = require("vm");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
-    .populate("category")
-    .exec((ree, product) => {
+    // .populate("category")
+    .exec((err, product) => {
       if (err) {
         return res.status(400).json({
           error: "Product not found",
@@ -112,15 +112,16 @@ exports.updateProduct = (req, res) => {
 };
 
 exports.removeProduct = (req, res) => {
-  const product = req.product;
-  product.remove((err, product) => {
-    if (err) {
+  let product = req.product;
+  product.remove((error, deletedProduct) => {
+    if (error) {
       return res.status(400).json({
-        error: "product unable to delete",
+        error: "Failed to delete the product",
       });
     }
     res.json({
-      message: "product successfully deleted",
+      message: "Deletion was a success",
+      deletedProduct,
     });
   });
 };
