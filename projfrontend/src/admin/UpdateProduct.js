@@ -1,193 +1,145 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { getCategories, addProduct, getProduct } from "./helper/adminapicall";
-import { isAuthenticated } from "../auth/helper/index";
+import { getCategories, getProduct } from "./helper/adminapicall";
 
 const UpdateProduct = (props) => {
-  const { user, token } = isAuthenticated();
-
+  // variables
+  let productId;
   const [values, setValues] = useState({
     name: "",
     description: "",
-    price: "",
-    stock: "",
     photo: "",
-    categories: [],
+    price: "",
     category: "",
-    loading: false,
-    error: "",
-    createdProduct: "",
-    getaRedirect: false,
-    formData: "",
+    categories: [],
+    stock: "",
   });
 
   const {
     name,
     description,
-    price,
-    stock,
+    photo,
     categories,
     category,
-    loading,
-    error,
-    createdProduct,
-    getaRedirect,
-    formData,
+    stock,
+    price,
   } = values;
+  // ====================
 
-  const preload = (productId) => {
+  // use effect
+  useEffect(() => {
+    productId = props[0].match.params.productId;
+    preLoad();
+  }, []);
+  // =======================
+
+  // preload items
+  const preLoad = () => {
     getProduct(productId).then((data) => {
       if (data.error) {
-        console.log(error);
+        console.log("product not found");
       } else {
-        preLoadCategories();
+        getAllCategories();
         setValues({
           ...values,
           name: data.name,
           description: data.description,
           price: data.price,
-          category: data.category,
           stock: data.stock,
-          formData: new FormData(),
+          category: data.category,
         });
       }
     });
   };
+  // ===========================
 
-  const preLoadCategories = () => {
+  // get all categories
+  const getAllCategories = () => {
     getCategories().then((data) => {
+      console.log(data);
       if (data.error) {
-        setValues({ ...values, error: data.error });
+        console.log("not categories found");
       } else {
-        setValues({ categories: data, formData: new FormData() });
+        setValues({ ...values, categories: data });
       }
     });
   };
 
-  useEffect(() => {
-    preload(props[0].match.params.productId);
-  }, []);
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setValues({ ...values, error: "", loading: true });
-    UpdateProduct(user._id, token, props[0].match.params.productId, formData)
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: data.error });
-        } else {
-          setValues({
-            ...values,
-            name: "",
-            description: "",
-            price: "",
-            photo: "",
-            stock: "",
-            loading: false,
-            createdProduct: data.name,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value });
-  };
-
-  const createProductForm = () => (
-    <form>
-      <span>Post photo</span>
-      <div className="form-group">
-        <label className="btn btn-block btn-success">
+  // =============================
+  // update form html
+  const updateProductForm = () => {
+    return (
+      <form>
+        <div className="form-group">
+          <label>Name</label>
           <input
-            onChange={handleChange("photo")}
-            type="file"
-            name="photo"
-            accept="image"
-            placeholder="choose a file"
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <input
-          onChange={handleChange("name")}
-          name="name"
-          className="form-control"
-          placeholder="Name"
-          value={name}
-        />
-      </div>
-      <div className="form-group">
-        <textarea
-          onChange={handleChange("description")}
-          name="description"
-          className="form-control"
-          placeholder="Description"
-          value={description}
-        />
-      </div>
-      <div className="form-group">
-        <input
-          onChange={handleChange("price")}
-          type="number"
-          className="form-control"
-          placeholder="Price"
-          name="price"
-          value={price}
-        />
-      </div>
-      <div className="form-group">
-        <select
-          onChange={handleChange("category")}
-          className="form-control"
-          placeholder="Category"
-          name="category"
-        >
-          <option>Select</option>
-          {categories &&
-            categories.map((cate, index) => (
-              <option key={index} value={cate._id}>
-                {cate.name}
-              </option>
-            ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <input
-          onChange={handleChange("stock")}
-          type="number"
-          className="form-control"
-          placeholder="Stock"
-          name="stock"
-          value={stock}
-        />
-      </div>
-
-      <button
-        type="submit"
-        onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
-      >
-        Update Product
-      </button>
-    </form>
-  );
+            className="form-control"
+            type="text"
+            name="name"
+            value={name}
+          ></input>
+        </div>
+        <div className="form-group">
+          <label>Description</label>
+          <input
+            className="form-control"
+            type="text"
+            name="description"
+            value={description}
+          ></input>
+        </div>
+        <div className="form-group">
+          <label>Photo</label>
+          <input className="form-control" type="file" name="photo"></input>
+        </div>
+        <div className="form-group">
+          <label>Category</label>
+          <select className="form-control">
+            {categories.map((item, index) => {
+              return (
+                <option key={index} value={item._id}>
+                  {item.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Price</label>
+          <input
+            className="form-control"
+            type="text"
+            name="price"
+            value={price}
+          ></input>
+        </div>
+        <div className="form-group">
+          <label>stock</label>
+          <input
+            className="form-control"
+            type="text"
+            name="stock"
+            value={stock}
+          ></input>
+        </div>
+        <button type="submit" className="btn btn-dark">
+          Update Product
+        </button>
+      </form>
+    );
+  };
+  // =================
 
   return (
-    <Base title="Update A  Product">
+    <Base title="Update Product">
       <div className="container bg-info p-4 my-4">
         <div className="row p-4">
           <div className="col-md-5 mx-auto">
             <Link to="/admin/dashboard" className="btn btn-warning mb-3">
               Go back to admin dashboard
             </Link>
-            <div className="bg-light bg-light p-4">{createProductForm()}</div>
+            <div className="bg-light bg-light p-4">{updateProductForm()}</div>
           </div>
         </div>
       </div>
