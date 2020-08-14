@@ -14,6 +14,7 @@ const UpdateProduct = (props) => {
     category: "",
     categories: [],
     stock: "",
+    formData: "",
   });
 
   const {
@@ -24,6 +25,7 @@ const UpdateProduct = (props) => {
     category,
     stock,
     price,
+    formData,
   } = values;
   // ====================
 
@@ -48,6 +50,7 @@ const UpdateProduct = (props) => {
           price: data.price,
           stock: data.stock,
           category: data.category,
+          formData: new FormData(),
         });
       }
     });
@@ -57,11 +60,10 @@ const UpdateProduct = (props) => {
   // get all categories
   const getAllCategories = () => {
     getCategories().then((data) => {
-      console.log(data);
       if (data.error) {
         console.log("not categories found");
       } else {
-        setValues({ ...values, categories: data });
+        setValues({ categories: data, formData: new FormData() });
       }
     });
   };
@@ -96,13 +98,14 @@ const UpdateProduct = (props) => {
         <div className="form-group">
           <label>Category</label>
           <select className="form-control">
-            {categories.map((item, index) => {
-              return (
-                <option key={index} value={item._id}>
-                  {item.name}
-                </option>
-              );
-            })}
+            {categories &&
+              categories.map((item, index) => {
+                return (
+                  <option key={index} value={item._id}>
+                    {item.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="form-group">
