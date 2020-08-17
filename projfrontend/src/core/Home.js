@@ -1,11 +1,31 @@
 import React from "react";
 import { API } from "../backend";
 import Base from "./Base";
+import Card from "./card";
 
 const Home = () => {
   return (
     <Base title="Home page">
-      <h1>main content</h1>
+      <div className="row">
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+        <div className="col-md-3">
+          <Card></Card>
+        </div>
+      </div>
     </Base>
   );
 };
