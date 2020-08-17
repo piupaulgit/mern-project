@@ -1,13 +1,10 @@
 import React from "react";
+import ImageHelper from "./helper/ImageHelper";
 
-const Card = () => {
+const Card = ({ product }) => {
   return (
     <div class="card mb-4">
-      <img
-        class="card-img-top"
-        src="https://picsum.photos/200/150"
-        alt="Card image cap"
-      />
+      <ImageHelper product={product} />
       <div class="card-body">
         <h5 class="card-title">Product name</h5>
         <p class="card-text">Some quick example text to build on the card.</p>
