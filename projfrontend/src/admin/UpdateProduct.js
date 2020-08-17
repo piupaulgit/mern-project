@@ -98,14 +98,13 @@ const UpdateProduct = (props) => {
         <div className="form-group">
           <label>Category</label>
           <select className="form-control">
-            {categories &&
-              categories.map((item, index) => {
-                return (
-                  <option key={index} value={item._id}>
-                    {item.name}
-                  </option>
-                );
-              })}
+            {categories.map((item, index) => {
+              return (
+                <option key={index} value={item._id}>
+                  {item.name}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group">

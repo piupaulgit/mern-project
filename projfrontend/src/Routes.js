@@ -11,6 +11,7 @@ import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
+import ManageCategory from "./admin/manageCategory";
 
 const Routes = () => {
   return (
@@ -48,6 +49,11 @@ const Routes = () => {
           path="/admin/product/:productId"
           exact
           component={UpdateProduct}
+        ></AdminRoute>
+        <AdminRoute
+          path="/admin/categories"
+          exact
+          component={ManageCategory}
         ></AdminRoute>
       </Switch>
     </BrowserRouter>
