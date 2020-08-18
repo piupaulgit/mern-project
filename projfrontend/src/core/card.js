@@ -5,7 +5,7 @@ const Card = ({ product }, addToCart = true, removeFromCart = false) => {
   const showAddToCart = (adddToCart) => {
     return (
       adddToCart && (
-        <a href="#" class="btn btn-success mr-2">
+        <a href="#" className="btn btn-success mr-2">
           Add to cart
         </a>
       )
@@ -15,18 +15,20 @@ const Card = ({ product }, addToCart = true, removeFromCart = false) => {
   const showRemoveFromCart = (removeFromCart) => {
     return (
       removeFromCart && (
-        <a href="#" class="btn btn-danger">
+        <a href="#" className="btn btn-danger">
           Remove from cart
         </a>
       )
     );
   };
   return (
-    <div class="card mb-4">
+    <div className="card mb-4">
       <ImageHelper product={product} />
-      <div class="card-body">
-        <h5 class="card-title">Product name</h5>
-        <p class="card-text">Some quick example text to build on the card.</p>
+      <div className="card-body">
+        <h5 className="card-title">Product name</h5>
+        <p className="card-text">
+          Some quick example text to build on the card.
+        </p>
         {showAddToCart(addToCart)}
         {showRemoveFromCart(removeFromCart)}
       </div>
