@@ -1,7 +1,7 @@
 import React from "react";
 import { API } from "../backend";
 import Base from "./Base";
-import Card from "./card";
+import Card from "./Card";
 
 const Home = () => {
   return (
