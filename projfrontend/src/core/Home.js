@@ -32,7 +32,7 @@ const Home = () => {
           products.map((item, index) => {
             return (
               <div className="col-md-3" key={index}>
-                <Card></Card>
+                <Card product={item}></Card>
               </div>
             );
           })}
