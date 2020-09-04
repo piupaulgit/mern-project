@@ -12,7 +12,7 @@ import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 import ManageCategory from "./admin/manageCategory";
-import Cart from "./core/cart";
+import Cart from "./core/Cart";
 
 const Routes = () => {
   return (

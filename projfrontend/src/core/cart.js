@@ -41,6 +41,7 @@ const Cart = () => {
   return (
     <Base title="My Cart">
       <div className="container">
+        <h5>Products in Cart</h5>
         <div className="row">
           <div className="col-md-6 text-dark p-4">{loadProducts()}</div>
           <div className="col-md-6 text-light p-4">{loadCheckout()}</div>
