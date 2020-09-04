@@ -5,13 +5,14 @@ import { loadCart } from "./helper/cartHelper";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
+  const [reload,setReload] = useState(false)
   const getProducts = () => {
     setProducts(loadCart());
   };
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [reload]);
 
   const loadProducts = () => {
     return (
@@ -23,6 +24,8 @@ const Cart = () => {
                 product={item}
                 addtoCart={false}
                 removeFromCart={true}
+                setReload = {setReload}
+                reload = {reload}
               ></Card>
             </div>
           );
