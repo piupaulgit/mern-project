@@ -5,7 +5,7 @@ import { loadCart } from "./helper/cartHelper";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [reload,setReload] = useState(false)
+  const [reload, setReload] = useState(false);
   const getProducts = () => {
     setProducts(loadCart());
   };
@@ -24,8 +24,8 @@ const Cart = () => {
                 product={item}
                 addtoCart={false}
                 removeFromCart={true}
-                setReload = {setReload}
-                reload = {reload}
+                setReload={setReload}
+                reload={reload}
               ></Card>
             </div>
           );
@@ -57,8 +57,8 @@ const Cart = () => {
 export default Cart;
 
 export const emptyCart = (next) => {
-  if(typeof window !== undefined){
-    localStorage.removeItem('cart');
-    next()
+  if (typeof window !== undefined) {
+    localStorage.removeItem("cart");
+    next();
   }
-}
+};
