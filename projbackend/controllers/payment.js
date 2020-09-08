@@ -3,13 +3,14 @@ const { json } = require("body-parser");
 
 var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
-  merchantId: "useYourMerchantId",
-  publicKey: "useYourPublicKey",
-  privateKey: "useYourPrivateKey",
+  merchantId: "hq3cfstxtqzvpjxq",
+  publicKey: "6tsv7b5b6tzr3d4w",
+  privateKey: "099ee63760a2370fbe14da006362ea8b",
 });
 
 exports.getToken = (req, res) => {
   gateway.clientToken.generate({}, function (err, response) {
+    console.log(err, response);
     if (err) {
       res.status(500).send(err);
     } else {
@@ -31,9 +32,9 @@ exports.porecessPayment = (req, res) => {
     },
     function (err, result) {
       if (err) {
-        res.status(500).json(err);
+        res.status(500).send(err);
       } else {
-        res.json(result);
+        res.send(result);
       }
     }
   );
