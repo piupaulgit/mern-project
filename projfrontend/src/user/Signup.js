@@ -19,6 +19,7 @@ const Signup = () => {
   };
 
   const onSubmit = (event) => {
+    console.log("res");
     event.preventDefault();
     setValues({ ...values, error: false });
     signup({ name, email, password })
