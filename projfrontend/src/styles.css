@@ -20,3 +20,7 @@ body {
   vertical-align: bottom;
   margin-right: 3px;
 }
+
+.text-sm {
+  font-size: 12px;
+}
