@@ -8,8 +8,9 @@ const Base = ({ title = "page title", children }) => {
   return (
     <div className="base">
       <Menu></Menu>
-      <div className="jumbotron bg-dark text-white text-center rounded-0 p-0">
-        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+      <div className="jumbotron bg-light text-white text-center rounded-0 p-0">
+        { title === 'Home page' && (
+          <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img className="d-block w-100" src={sliderOne} alt="First slide" />
@@ -27,7 +28,14 @@ const Base = ({ title = "page title", children }) => {
             <span className="sr-only">Next</span>
           </a>
         </div>
-      </div>
+        )}
+        {title !== 'Home page' && (
+          <div className="otherpage-banner">
+            <h2 className="display-3">{title}</h2>
+          </div>
+          )
+        }
+        </div>
       <div className="main-content">{children}</div>
       {/* footer */}
       <Footer>

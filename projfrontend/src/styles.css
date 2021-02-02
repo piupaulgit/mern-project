@@ -5,16 +5,28 @@
 
 body {
 }
-
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
 /* button */
 .btn {
   border-radius: 3px;
+  font-size: 13px;
+  padding: 10px 33px;
 }
 
 .btn.btn-sm {
   font-size: 12px;
 }
-
+.btn-yellow {
+  background-color: #ffd327;
+  color: #333;
+}
+.btn-yellow:hover {
+  background-color: #ecbe0a;
+  color: #333;
+}
 .btn span svg {
   display: inline;
   vertical-align: bottom;
@@ -23,4 +35,29 @@ body {
 
 .text-sm {
   font-size: 12px;
+}
+
+.otherpage-banner {
+  min-height: 300px;
+  background-image: url(./assets/images/other-page-banner.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.otherpage-banner h2 {
+  font-size: 40px;
+  color: #333;
+}
+
+.heading {
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 25px;
+  color: #545353;
 }

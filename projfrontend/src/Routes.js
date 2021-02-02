@@ -13,12 +13,14 @@ import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 import ManageCategory from "./admin/manageCategory";
 import Cart from "./core/Cart";
+import About from "./core/About";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/about" exact component={About} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <PrivateRoute

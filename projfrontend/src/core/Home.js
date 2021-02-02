@@ -3,6 +3,8 @@ import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
 import { getAllProducts } from "./helper/coreapicalls";
+import aboutImage from '../assets/images/about-img.jpg'
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +29,18 @@ const Home = () => {
   ];
   return (
     <Base title="Home page">
-      <div className="row">
+      <div className="container">
+        <div className="row py-5 align-items-center">
+          <div className="col-md-5">
+            <img src={aboutImage}></img>
+          </div>
+          <div className="col-md-7 pl-5">
+            <h3 className="heading">ABOUT US</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, earum? Distinctio saepe nulla omnis, sit provident ad sunt perspiciatis quo, id ducimus magnam recusandae nesciunt, dolor dolorem illo fugit consequatur. Placeat sit at deleniti possimus nobis enim dolor velit porro? Eaque quos labore molestias culpa harum sequi eligendi? Deserunt nisi quod doloribus nam praesentium omnis illo itaque iure enim et?</p>
+            <Link to="/about" className="btn btn-yellow">Read More</Link>
+          </div>
+        </div>
+        <div className="row">
         {products &&
           products.map((item, index) => {
             return (
@@ -36,7 +49,9 @@ const Home = () => {
               </div>
             );
           })}
+        </div>
       </div>
+      
     </Base>
   );
 };
