@@ -1,0 +1,31 @@
+.sidenav h5 {
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.sidenav {
+  min-height: 100vh;
+  background-color: #ffd327;
+}
+
+.list-group {
+  /* border: 0; */
+  font-size: 12px;
+  color: #fff;
+}
+.list-group-item {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+.list-group a {
+  color: #fff;
+  display: block;
+  padding: 13px 20px;
+}
+.list-group a:hover {
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}

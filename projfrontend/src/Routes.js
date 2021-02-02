@@ -6,7 +6,6 @@ import Signin from "./user/Signin";
 import PrivateRoute from "./auth/helper/PrivateRoutes";
 import AdminRoute from "./auth/helper/AdminRoutes";
 import UserDashborad from "./user/UserDashBoard";
-import AdminDashboard from "./user/AdminDashBoard";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
@@ -14,6 +13,7 @@ import UpdateProduct from "./admin/UpdateProduct";
 import ManageCategory from "./admin/manageCategory";
 import Cart from "./core/Cart";
 import About from "./core/About";
+import AdminDashboard from "./user/AdminDashboard";
 
 const Routes = () => {
   return (

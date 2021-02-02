@@ -66,3 +66,29 @@ p {
 .main-content {
   min-height: 100vh;
 }
+
+.Admin-screen {
+  display: flex;
+}
+
+.admin-sidenav {
+  flex: 0 0 240px;
+  max-width: 240px;
+}
+
+.Admin-screen .main-content {
+  flex: 0 0 calc(100% - 240px);
+  max-width: calc(100% - 240px);
+}
+
+.admin-header {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+.admin-header h2 {
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: capitalize;
+}
