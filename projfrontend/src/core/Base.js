@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "./Menu";
 import sliderOne from '../assets/images/slider1_1920x960.png';
 import sliderTwo from '../assets/images/slider2_1920x960.png'
+import Footer from "./components/Footer";
 
 const Base = ({ title = "page title", children }) => {
   return (
@@ -28,9 +29,9 @@ const Base = ({ title = "page title", children }) => {
         </div>
       </div>
       <div className="main-content">{children}</div>
-      <div className="jumbotron bg-dark text-white text-center rounded-0">
-        <h2 className="text-white display-6">Footer</h2>
-      </div>
+      {/* footer */}
+      <Footer>
+      </Footer>
     </div>
   );
 };
