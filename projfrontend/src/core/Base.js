@@ -1,9 +1,9 @@
 import React from "react";
-import Menu from "./menu";
+import Menu from "./Menu";
 
 const Base = ({ title = "page title", children }) => {
   return (
-    <div className="container-fluid">
+    <div className="base">
       <Menu></Menu>
       <div className="jumbotron bg-light text-white text-center rounded-0">
         <h2 className="text-dark display-4">{title}</h2>

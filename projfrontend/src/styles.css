@@ -1,9 +1,22 @@
-.btn,
 .jumbotron,
 .nav :hover {
   border-radius: 0px;
 }
 
 body {
-  background: #343a40;
+}
+
+/* button */
+.btn {
+  border-radius: 3px;
+}
+
+.btn.btn-sm {
+  font-size: 12px;
+}
+
+.btn span svg {
+  display: inline;
+  vertical-align: bottom;
+  margin-right: 3px;
 }

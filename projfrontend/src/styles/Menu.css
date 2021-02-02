@@ -1,0 +1,20 @@
+.top-header {
+  background-color: #333;
+  padding: 7px 20px;
+}
+.top-header--nav {
+  list-style: none;
+  margin: 0;
+  font-size: 12px;
+  padding: 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+.top-header--nav li .nav-link {
+  padding: 3px 10px;
+}
+
+.top-header--nav li .nav-link span {
+  margin-right: 5px;
+  display: inherit;
+}
