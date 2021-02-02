@@ -82,7 +82,7 @@ const Menu = ({ history }) => {
         )}
         </ul>
       </div>
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <nav className="navbar navbar-expand-sm">
       <a class="navbar-brand" href="#">
         <img src={logo} alt></img>
       </a>

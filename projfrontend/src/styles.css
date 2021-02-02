@@ -18,6 +18,7 @@ img {
 
 .btn.btn-sm {
   font-size: 12px;
+  padding: 4px 8px;
 }
 .btn-yellow {
   background-color: #ffd327;
@@ -60,4 +61,8 @@ p {
   font-size: 14px;
   line-height: 25px;
   color: #545353;
+}
+
+.main-content {
+  min-height: 100vh;
 }
