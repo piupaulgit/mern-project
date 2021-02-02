@@ -18,3 +18,10 @@
   margin-right: 5px;
   display: inherit;
 }
+.navbar-brand img {
+  width: 130px;
+}
+
+.navbar-light .nav-item .nav-link {
+  color: #333;
+}

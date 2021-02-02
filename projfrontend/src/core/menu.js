@@ -2,11 +2,12 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { isAuthenticated, signout } from "../auth/helper";
 import '../styles/Menu.css';
+import logo from '../assets/images/store-logo.jpg'
 const currentLink = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#fff" };
+    return { color: "#345678" };
   } else {
-    return { color: "#d2d1d1c2" };
+    return { color: "#333" };
   }
 };
 const Menu = ({ history }) => {
@@ -80,8 +81,14 @@ const Menu = ({ history }) => {
         )}
         </ul>
       </div>
-      <nav className="navbar navbar-expand-sm bg-light">
-        <ul className="navbar-nav w-100">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src={logo} alt></img>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link to="/" className="nav-link" style={currentLink(history, "/")}>
             Home
