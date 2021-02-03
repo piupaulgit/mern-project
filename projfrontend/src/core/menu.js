@@ -82,7 +82,6 @@ const Menu = ({ history }) => {
         )}
         </ul>
       </div>
-      { isAuthenticated()?.user?.role !== 1 && (
         <nav className="navbar navbar-expand-sm">
         <a className="navbar-brand" href="#">
           <img src={logo} alt></img>
@@ -138,9 +137,6 @@ const Menu = ({ history }) => {
          
         </ul>
         </nav>
-      )
-
-      }
     </div>
     );
 };

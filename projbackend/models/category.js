@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { schema } = require("./user");
 const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema(
@@ -8,7 +7,8 @@ const CategorySchema = new Schema(
       type: String,
       trim: true,
       unique: true,
-      required: true
+      required: true,
+      minlength: 3
     },
   },
   { timestamps: true }

@@ -6,7 +6,9 @@
 }
 .sidenav {
   min-height: 100vh;
-  background-color: #ffd327;
+  background-color: #333;
+  position: fixed;
+  width: 240px;
 }
 
 .list-group {

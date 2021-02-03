@@ -81,12 +81,17 @@ p {
   flex: 0 0 calc(100% - 240px);
   max-width: calc(100% - 240px);
 }
-
+.Admin-screen .main-content > .container-fluid {
+  padding-top: 100px !important;
+}
 .admin-header {
   min-height: 74px;
   display: flex;
   align-items: center;
   padding-left: 30px;
+  position: fixed;
+  width: 100%;
+  box-shadow: 2px 3px 3px #eaeaea;
 }
 .admin-header h2 {
   font-size: 18px;
@@ -100,4 +105,9 @@ p {
 
 .alert {
   text-transform: capitalize;
+}
+
+.scrallable-div {
+  max-height: 500px;
+  overflow-y: auto;
 }

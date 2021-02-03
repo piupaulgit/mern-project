@@ -2,6 +2,7 @@ import { API } from "../../backend";
 
 // add category
 export const addCategory = (userId, token, category) => {
+  debugger
   return fetch(`${API}/category/create/${userId}`, {
     method: "POST",
     headers: {
@@ -10,14 +11,15 @@ export const addCategory = (userId, token, category) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(category),
-  })
-    .then((res) => {
+  }).then((res) => {
       return res.json;
-    })
-    .catch((err) => {
+    }).then(suc =>{
+      console.log(suc,'pppp')
+    }).catch((err) => {
       console.log(err);
     });
 };
+
 
 // get all categories
 export const getCategories = () => {

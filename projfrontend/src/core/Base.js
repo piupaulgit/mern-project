@@ -9,7 +9,9 @@ import AdminSidenav from "./AdminSidenav";
 const Base = ({ title = "page title", children }) => {
   return (
     <div className="base">
-      <Menu></Menu>
+      {(isAuthenticated()?.user?.role !== 1) && (
+              <Menu></Menu>
+      )}
       <div className={"jumbotron bg-light text-white text-center rounded-0 p-0" + (isAuthenticated()?.user?.role === 1 ? ' d-none': '')}>
         { title === 'Home page' && isAuthenticated()?.user?.role !== 1 && (
           <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
