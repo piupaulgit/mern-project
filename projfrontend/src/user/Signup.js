@@ -75,7 +75,7 @@ const Signup = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-primary btn-block"
+          className="btn btn-yellow btn-block"
           value="Register"
           onClick={onSubmit}
         ></input>
@@ -89,8 +89,8 @@ const Signup = () => {
         className="alert alert-success"
         style={{ display: success ? "" : "none" }}
       >
-        New Account successfully.
-        <Link to="/signin">Login now</Link>
+        New Account created successfully. 
+        <Link to="/signin"> Login now</Link>
       </div>
     );
   };
@@ -101,25 +101,24 @@ const Signup = () => {
         className="alert alert-danger"
         style={{ display: error ? "" : "none" }}
       >
-        Something went wrong.
+        {error}
       </div>
     );
   };
   return (
-    <Base title="Register Now">
-      <div className="row">
-        <div className="col-md-5 p-0 mx-auto">
-          {successMessage()}
-          {errorMessage()}
+    <Base title="Create Your New Account">
+      <div className="container">
+        <div className="row pt-5">
+          <div className="col-md-5 p-0 mx-auto">
+            {successMessage()}
+            {errorMessage()}
+          </div>
         </div>
-      </div>
-      <div className="row py-4">
-        <div className="col-md-5 mx-auto border p-3 mb-4 ">
-          <h1 className="display-5 font-weight-light mb-2">Register</h1>
-          {signupForm()}
-          <p>name: {name}</p>
-          <p>email: {email}</p>
-          <p>password: {password}</p>
+        <div className="row">
+          <div className="col-md-5 mx-auto p-5 mb-4 bg-light form-card">
+            <h1 className="heading text-center mb-2">Register</h1>
+            {signupForm()}
+          </div>
         </div>
       </div>
     </Base>

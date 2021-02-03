@@ -10,7 +10,7 @@ import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
-import ManageCategory from "./admin/manageCategory";
+import ManageCategory from "./admin/ManageCategory";
 import Cart from "./core/Cart";
 import About from "./core/About";
 import AdminDashboard from "./user/AdminDashboard";

@@ -31,11 +31,9 @@ const AddCategory = () => {
   };
   const addCategoryForm = () => {
     return (
-      <form>
+      <form className="form-card bg-light p-5">
         <div className="form-group">
-          <label className="text-uppercase font-weight-bold">
-            Add Category
-          </label>
+          <h2 className="heading">Add Category</h2>
           <input
             type="text"
             className="form-control"
@@ -63,8 +61,8 @@ const AddCategory = () => {
     }
   };
   return (
-    <Base title="Add Category" description="this is to add new categories">
-      <div className="container bg-info p-4 my-4">
+    <Base title="Add New Category" description="this is to add new categories">
+      {/* <div className="container bg-info p-4 my-4">
         <div className="row p-4">
           <div className="col-md-5 mx-auto">
             <Link to="/admin/dashboard" className="btn btn-warning mb-3">
@@ -75,6 +73,13 @@ const AddCategory = () => {
               {successMsg()}
               {errorMsg()}
             </div>
+          </div>
+        </div>
+      </div> */}
+      <div className="container-fluid add-category p-5">
+        <div className="row">
+          <div className="col-md-6">
+            {addCategoryForm()}
           </div>
         </div>
       </div>

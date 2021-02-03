@@ -30,8 +30,9 @@ img {
 }
 .btn span svg {
   display: inline;
-  vertical-align: bottom;
-  margin-right: 3px;
+  vertical-align: middle;
+  margin-right: 7px;
+  width: 13px;
 }
 
 .text-sm {
@@ -95,4 +96,8 @@ p {
 
 .form-card {
   box-shadow: 1px 0px 5px -1px #cecbcb;
+}
+
+.alert {
+  text-transform: capitalize;
 }
