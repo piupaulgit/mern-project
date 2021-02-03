@@ -63,8 +63,8 @@ const Signin = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-primary btn-block"
-          value="Register"
+          className="btn btn-yellow btn-block"
+          value="Login"
           onClick={onSubmit}
         ></input>
       </form>
@@ -83,17 +83,6 @@ const Signin = () => {
       return <Redirect to="/"></Redirect>;
     }
   };
-  const successMessage = () => {
-    // return (
-    //   <div
-    //     className="alert alert-success"
-    //     style={{ display: success ? "" : "none" }}
-    //   >
-    //     New Account successfully.
-    //     <Link to="/signin">Login now</Link>
-    //   </div>
-    // );
-  };
 
   const errorMessage = () => {
     return (
@@ -107,13 +96,20 @@ const Signin = () => {
   };
   return (
     <Base title="Login to Your Account">
-      {errorMessage()}
-      <div className="row py-4">
-        <div className="col-md-5 mx-auto border p-3 mb-4 ">
-          <h1 className="display-5 font-weight-light mb-2">Login</h1>
-          {signupIn()}
-          {JSON.stringify(values)}
-          {performRedirect()};
+      <div className="container">
+        <div className="row py-5">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="mx-auto col-md-5 p-0">
+               {errorMessage()}
+              </div>
+            </div>
+          </div>
+          <div className="col-md-5 mx-auto p-5 mb-4 bg-light form-card">
+            <h1 className="text-center mb-2 heading">Login</h1>
+            {signupIn()}
+            {performRedirect()}
+          </div>
         </div>
       </div>
     </Base>

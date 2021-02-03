@@ -92,3 +92,7 @@ p {
   font-weight: 300;
   text-transform: capitalize;
 }
+
+.form-card {
+  box-shadow: 1px 0px 5px -1px #cecbcb;
+}
