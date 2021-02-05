@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getCategories } from "./helper/adminapicall";
+import { getCategories, updateCategory } from "./helper/adminapicall";
 import { addCategory } from "./helper/adminapicall";
 
 const ManageCategory = () => {
@@ -12,6 +12,7 @@ const ManageCategory = () => {
   const [categories, setCategories] = useState([]);
   const { user, token } = isAuthenticated();
   const [modalType, setModalType] = useState("")
+  const [currentCategory, setCurrentCategory] = useState({})
 
   useEffect(() => {
     preLoad();
@@ -24,7 +25,8 @@ const ManageCategory = () => {
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    addCategory(user._id, token, { name: categoryName })
+    if(modalType === 'add'){
+      addCategory(user._id, token, { name: categoryName })
       .then((data) => {
         if (data.error) {
           setErr(data.error);
@@ -39,6 +41,23 @@ const ManageCategory = () => {
       .catch((err) => {
         setErr("Somthing went wrong");
       });
+    }
+    else if(modalType === 'edit'){
+      updateCategory(currentCategory._id, categoryName, user._id,token)
+      .then((data) => {
+        if (data.error) {
+          setErr(data.error);
+          setSuccess("");
+        }
+        else{
+          setSuccess("category successfully added");
+          preLoad()
+          setErr("");
+        }
+      }).catch(err => {
+        setErr("Somthing went wrong");
+      })
+    }
   };
   const addCategoryForm = () => {
     return (
@@ -89,8 +108,11 @@ const ManageCategory = () => {
   }
 
   const openEditCategoryModal = (category) => {
+    setSuccess("")
+    setErr("")
     setModalType("edit")
     console.log(category)
+    setCurrentCategory(category)
     setCategoryName(category.name)
   }
 

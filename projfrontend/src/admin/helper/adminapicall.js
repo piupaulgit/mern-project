@@ -17,6 +17,23 @@ export const addCategory = (userId, token, category) => {
     });
 };
 
+// update Category
+export const updateCategory = (categoryId, updatedName, userId, token) => {
+  return fetch(`${API}/category/${categoryId}/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({name: updatedName}),
+  }).then((res) => {
+      return res.json();
+    }).catch((err) => {
+      console.log(err);
+    });
+}
+
 
 // get all categories
 export const getCategories = () => {
