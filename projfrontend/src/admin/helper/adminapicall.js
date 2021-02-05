@@ -37,7 +37,16 @@ export const updateCategory = (categoryId, updatedName, userId, token) => {
 // delete category
 export const deleteCategory = (categoryId, userId, token) => {
   return fetch(`${API}/category/${categoryId}/${userId}`, {
-
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(data => {
+    return data.json()
+  }).catch(err => {
+    console.log(err)
   })
 }
 

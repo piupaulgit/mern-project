@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getCategories, updateCategory } from "./helper/adminapicall";
+import { deleteCategory, getCategories, updateCategory } from "./helper/adminapicall";
 import { addCategory } from "./helper/adminapicall";
 
 const ManageCategory = () => {
@@ -73,7 +73,7 @@ const ManageCategory = () => {
             onChange={handleChange}
           ></input>
         </div>
-        <button type="submit" className="btn btn-dark mb-4" onClick={onSubmit}>
+        <button type="submit" className="btn btn-dark mb-4" onClick={onSubmit} id="addEditBtn">
         { modalType === 'add' ? "Add" : "Edit"}
         </button>
       </form>
@@ -111,27 +111,33 @@ const ManageCategory = () => {
     setSuccess("")
     setErr("")
     setModalType("edit")
-    console.log(category)
     setCurrentCategory(category)
     setCategoryName(category.name)
   }
 
   const openDeleteModal = (category) => {
     setCurrentCategory(category)
+    setSuccess("")
+    setErr("")
   }
 
-    const deleteThisCategory = (productId) => {
-      // deleteProduct(user._id, token, productId)
-      //   .then((data) => {
-      //     if (data.error) {
-      //       console.log(data.error);
-      //     } else {
-      //       preLoad();
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+    const deleteThisCategory = () => {
+      deleteCategory(currentCategory._id,user._id, token).then(data => {
+        if(data.error){
+          setErr(data.error);
+          setSuccess("");
+        }
+        else{
+          setSuccess("Category Successfully deleted")
+          setErr("")
+          preLoad()
+          setTimeout(() => {
+            document.getElementById('closeDeleteModal').click()
+          },200)
+        }
+      }).catch(err => {
+        setErr("Something went wrong");
+      })
     };
   return (
     <Base title="Manage Category">
@@ -210,9 +216,11 @@ const ManageCategory = () => {
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-body">
+                {successMsg()}
+                {errorMsg()}
                 <p>Do you really want to delete <b> {currentCategory.name} ? </b></p>
                 <div className="d-flex justify-content-end">
-                  <button className="btn btn-primary btn-sm mr-2" data-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button className="btn btn-primary btn-sm mr-2" data-dismiss="modal" aria-label="Close" id="closeDeleteModal">Cancel</button>
                   <button className="btn btn-danger btn-sm" onClick={deleteThisCategory}>Delete</button>
                 </div>
               </div>
