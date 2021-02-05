@@ -11,6 +11,7 @@ const ManageCategory = () => {
   const [success, setSuccess] = useState("");
   const [categories, setCategories] = useState([]);
   const { user, token } = isAuthenticated();
+  const [modalType, setModalType] = useState("")
 
   useEffect(() => {
     preLoad();
@@ -54,7 +55,7 @@ const ManageCategory = () => {
           ></input>
         </div>
         <button type="submit" className="btn btn-dark mb-4" onClick={onSubmit}>
-          Add
+        { modalType === 'add' ? "Add" : "Edit"}
         </button>
       </form>
     );
@@ -68,12 +69,11 @@ const ManageCategory = () => {
   };
   const errorMsg = () => {
     if (err) {
-      return <p className="text-danger">{err}</p>;
+      return <div className="alert alert-danger">{err}</div> ;
     }
   };
   const preLoad = () => {
     getCategories().then((data) => {
-      console.log(data);
       if (data.error) {
         console.log(data.error);
       } else {
@@ -82,8 +82,16 @@ const ManageCategory = () => {
     });
   };
   const openModal = () => {
+    setModalType("add")
     setSuccess("")
     setErr("")
+    setCategoryName("")
+  }
+
+  const openEditCategoryModal = (category) => {
+    setModalType("edit")
+    console.log(category)
+    setCategoryName(category.name)
   }
 
   //   const deleteThisProduct = (productId) => {
@@ -120,8 +128,7 @@ const ManageCategory = () => {
                       <tr key={index}>
                         <td>{item.name}</td>
                         <td>
-                          <Link
-                            to={`/admin/product/${item._id}`}
+                          <button  data-toggle="modal" data-target="#addCategory" onClick={() => openEditCategoryModal(item)}
                             className="btn btn-success mr-2 btn-sm"
                           >
                             <span>
@@ -131,7 +138,7 @@ const ManageCategory = () => {
                               </svg>
                             </span>
                             Edit
-                          </Link>
+                          </button>
                           <button
                             to="/"
                             className="btn btn-danger btn-sm"
@@ -157,7 +164,9 @@ const ManageCategory = () => {
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addCategoryLabel">Create New Category</h5>
+                <h5 class="modal-title" id="addCategoryLabel">
+                  { modalType === 'add' ? "Add New Category" : "Edit Category"}
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
