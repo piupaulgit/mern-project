@@ -34,6 +34,12 @@ export const updateCategory = (categoryId, updatedName, userId, token) => {
     });
 }
 
+// delete category
+export const deleteCategory = (categoryId, userId, token) => {
+  return fetch(`${API}/category/${categoryId}/${userId}`, {
+
+  })
+}
 
 // get all categories
 export const getCategories = () => {

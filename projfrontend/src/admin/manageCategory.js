@@ -116,19 +116,23 @@ const ManageCategory = () => {
     setCategoryName(category.name)
   }
 
-  //   const deleteThisProduct = (productId) => {
-  //     deleteProduct(user._id, token, productId)
-  //       .then((data) => {
-  //         if (data.error) {
-  //           console.log(data.error);
-  //         } else {
-  //           preLoad();
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
+  const openDeleteModal = (category) => {
+    setCurrentCategory(category)
+  }
+
+    const deleteThisCategory = (productId) => {
+      // deleteProduct(user._id, token, productId)
+      //   .then((data) => {
+      //     if (data.error) {
+      //       console.log(data.error);
+      //     } else {
+      //       preLoad();
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+    };
   return (
     <Base title="Manage Category">
       <div className="container-fluid p-5">
@@ -162,9 +166,9 @@ const ManageCategory = () => {
                             Edit
                           </button>
                           <button
-                            to="/"
+                            data-toggle="modal" data-target="#deleteCategory"
                             className="btn btn-danger btn-sm"
-                            //   onClick={() => deleteThisProduct(item._id)}
+                            onClick={() => openDeleteModal(item)}
                           >
                             <span>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
@@ -197,6 +201,20 @@ const ManageCategory = () => {
                 {successMsg()}
                 {errorMsg()}
                 {addCategoryForm()}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* delete pop up */}
+        <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>Do you really want to delete <b> {currentCategory.name} ? </b></p>
+                <div className="d-flex justify-content-end">
+                  <button className="btn btn-primary btn-sm mr-2" data-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button className="btn btn-danger btn-sm" onClick={deleteThisCategory}>Delete</button>
+                </div>
               </div>
             </div>
           </div>
