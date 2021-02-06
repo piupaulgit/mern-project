@@ -39,7 +39,7 @@ const ManageCategory = () => {
         }
       })
       .catch((err) => {
-        setErr("Somthing went wrong");
+        setErr("Somthing went wrong here.");
       });
     }
     else if(modalType === 'edit'){
