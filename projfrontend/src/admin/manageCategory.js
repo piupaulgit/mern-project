@@ -74,7 +74,7 @@ const ManageCategory = () => {
           ></input>
         </div>
         <button type="submit" className="btn btn-dark mb-4" onClick={onSubmit} id="addEditBtn">
-        { modalType === 'add' ? "Add" : "Edit"}
+        { modalType === 'add' ? "Add" : "Update"}
         </button>
       </form>
     );
