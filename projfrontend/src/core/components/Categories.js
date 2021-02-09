@@ -41,7 +41,7 @@ const Categories = () => {
     });
   };
     return (
-        <div className="categoties bg-light">
+        <div className="categoties bg-light py-5">
           <div className="container">
             <h2 className="heading text-center mb-5">Categories</h2>
             <div className="row">
@@ -54,7 +54,7 @@ const Categories = () => {
                           <div className="row">
                            {category.map((cat,indx) => {
                               return(
-                                <div className="col-lg-3">
+                                <div className="col-lg-3" key={indx}>
                                   <Link to="/" className="category-block">
                                     {cat.name} <br></br>Collection
                                   </Link>

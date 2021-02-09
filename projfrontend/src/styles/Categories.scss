@@ -1,5 +1,4 @@
 .category-block {
-  background-color: red;
   display: block;
   height: 250px;
   color: #fff;
@@ -10,8 +9,37 @@
   font-weight: 300;
   text-align: center;
   line-height: 1.2;
+  background-color: #ffd327;
+  text-transform: capitalize;
+  transition: all 0.5s;
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+  }
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: 30px;
+  display: block;
+  background: #333;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  color: #fff;
+  font-size: 23px;
   &:hover {
     color: #fff;
     text-decoration: none;
+  }
+  &.left {
+    left: -14px;
+  }
+  &.right {
+    right: -14px;
   }
 }
