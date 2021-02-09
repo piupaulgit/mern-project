@@ -5,6 +5,7 @@ import Card from "./Card";
 import { getAllProducts } from "./helper/coreapicalls";
 import aboutImage from '../assets/images/about-img.jpg'
 import { Link } from "react-router-dom";
+import Categories from "./components/Categories";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,13 @@ const Home = () => {
             <Link to="/about" className="btn btn-yellow">Read More</Link>
           </div>
         </div>
+      </div>
+      {/* categories */}
+      <div className="bg-light py-5 my-5">
+          <Categories></Categories>
+      </div>
+      {/* categories */}
+      <div className="container">
         <div className="row">
         {products &&
           products.map((item, index) => {
