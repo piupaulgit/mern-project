@@ -48,7 +48,7 @@ const Categories = () => {
               <div className="col-lg-12">
                 <div id="Carousel" className="carousel slide">
                   <div className="carousel-inner">
-                    { categories.map((category, ind) => {
+                    {categories.map((category, ind) => {
                       return (
                         <div className={"item carousel-item " + (ind === 0 ? 'active' : '')}   key={ind}>
                           <div className="row">
