@@ -40,10 +40,11 @@ exports.createProduct = (req, res) => {
 
     let product = new Product(fields);
 
+    // handle file
     if (file.photo) {
       if (file.photo.size > 3000000) {
         return res.status(400).json({
-          error: "file size too big",
+          error: "File size too big",
         });
       }
       product.photo.data = fs.readFileSync(file.photo.path);
