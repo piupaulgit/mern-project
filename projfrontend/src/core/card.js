@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ImageHelper from "./helper/ImageHelper";
 import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
 import { Redirect } from "react-router-dom";
+import '../styles/ProductCard.scss';
 
 const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = val => val, reload = undefined }) => {
   const [redirect, setRedirect] = useState(false);
@@ -43,15 +44,16 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
     );
   };
   return (
-    <div className="card mb-4">
-      {getARedirect(redirect)}
-      <ImageHelper product={product} />
-      <div className="card-body">
-        <h5 className="card-title">{cartTitle}</h5>
-        <p className="card-text">{cartDescription}</p>
-        <p>Price: Rs. {cartPrice}</p>
-        {showAddToCart(addtoCart)}
-        {showRemoveFromCart(removeFromCart)}
+    <div>
+        <div className="card product-card">
+          {getARedirect(redirect)}
+          <ImageHelper product={product} />
+        </div>
+        <div className="card-body py-2 px-0 text-center">
+          <h5 className="card-title">{cartTitle}</h5>
+          <p>Price: Rs. {cartPrice}</p>
+          {/* {showAddToCart(addtoCart)} */}
+          {showRemoveFromCart(removeFromCart)}
       </div>
     </div>
   );
