@@ -48,6 +48,7 @@ const Home = () => {
       </div>
       {/* categories */}
       <div className="container">
+        <h2 className="text-center heading mt-4 mb-5">Products</h2>
         <div className="row">
         {products &&
           products.map((item, index) => {
