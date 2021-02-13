@@ -37,7 +37,8 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
   const showRemoveFromCart = (removeFromCart) => {
     return (
       removeFromCart && (
-        <button className="btn btn-danger" onClick={() => {removeItemFromCart(product._id); setReload(!reload)}}>
+        <button className="btn btn-danger" 
+        onClick={() => {removeItemFromCart(product._id); setReload(!reload)}}>
           Remove from cart
         </button>
       )

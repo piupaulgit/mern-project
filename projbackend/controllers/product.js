@@ -8,7 +8,7 @@ const { runInNewContext } = require("vm");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
-    // .populate("category")
+    .populate("category")
     .exec((err, product) => {
       if (err) {
         return res.status(400).json({
@@ -64,7 +64,7 @@ exports.createProduct = (req, res) => {
 
 // get single product
 exports.getProduct = (req, res) => {
-  req.product.photo = undefined;
+  // req.product.photo = undefined;
   return res.json(req.product);
 };
 
