@@ -64,7 +64,7 @@ exports.createProduct = (req, res) => {
 
 // get single product
 exports.getProduct = (req, res) => {
-  // req.product.photo = undefined;
+  req.product.photo = undefined;
   return res.json(req.product);
 };
 
