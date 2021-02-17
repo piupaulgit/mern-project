@@ -3,7 +3,7 @@ import { API } from "../../backend";
 import defaultProductImage from '../../assets/images/default-product-img.jpg'
 
 const ImageHelper = ({ product }) => {
-  const imageUrl = false
+  const imageUrl = product._id
     ? `${API}/product/photo/${product._id}`
     : defaultProductImage;
   return (

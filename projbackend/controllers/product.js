@@ -71,7 +71,7 @@ exports.getProduct = (req, res) => {
 exports.photo = (req, res, next) => {
   if (req.product.photo.data) {
     res.set("content-Type", req.product.photo.contentType);
-    return res.json(req.product.photo.data);
+    return res.send(req.product.photo.data);
   }
   next();
 };
