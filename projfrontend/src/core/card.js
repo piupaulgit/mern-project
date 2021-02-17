@@ -46,7 +46,7 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
     );
   };
   return (
-    <Link to="/"> 
+    <Link to="/" className="product-link"> 
         <div className="card product-card">
           {getARedirect(redirect)}
           <ImageHelper product={product} />
