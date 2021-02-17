@@ -26,8 +26,9 @@
   display: block;
   padding: 13px 20px;
 }
+
 .list-group a:hover {
-  background-color: #fff;
-  color: #333;
+  background-color: #1f1e1e;
   text-decoration: none;
+  color: #fff;
 }

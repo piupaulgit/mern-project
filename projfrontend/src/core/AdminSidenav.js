@@ -1,17 +1,15 @@
 import React from 'react'
-import { Link, withRouter } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import '../styles/AdminSidenav.css'
 import logo from '../assets/images/store-logo.jpg'
 import { signout } from '../auth/helper';
 const currentLink = (history, path) => {
-    if (history?.location.pathname === path) {
-      return { backgroundcolor: '#deb513' };
+    if (history.location.pathname === path) {
+      return { backgroundColor: '#FFCC00' };
     } 
-    else{
-        return { backgroundcolor: 'red' };
-    }
   };
-const AdminSidenav = ({ history }) => {
+const AdminSidenav = () => {
+    let history = useHistory()
     return (
         <div className="admin-sidenav">
             <div className="sidenav">
@@ -24,13 +22,13 @@ const AdminSidenav = ({ history }) => {
                         <Link to="/admin/dashboard" style={currentLink(history,'/admin/dashboard')}>Dashboard</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/categories">Manage Category</Link>
+                        <Link to="/admin/categories" style={currentLink(history,'/admin/categories')}>Manage Category</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/create/product">Create Product</Link>
+                        <Link to="/admin/create/product" style={currentLink(history,'/admin/create/product')}>Create Product</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/products">Manage Products</Link>
+                        <Link to="/admin/products" style={currentLink(history,'/admin/products')}>Manage Products</Link>
                     </li>
                     {/* <li className="list-group-item">Manage Orders</li> */}
                 </ul>

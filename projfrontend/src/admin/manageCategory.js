@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Base from "../core/Base";
-import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
 import { deleteCategory, getCategories, updateCategory } from "./helper/adminapicall";
 import { addCategory } from "./helper/adminapicall";
+import AdminBase from "../core/AdminBase";
 
 const ManageCategory = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -140,7 +139,7 @@ const ManageCategory = () => {
       })
     };
   return (
-    <Base title="Manage Category">
+    <AdminBase title="Manage Category">
       <div className="container-fluid p-5">
         <div className="d-flex aling-items-center justify-content-between">
           <h2 className="heading mb-0">Category List</h2>
@@ -228,7 +227,7 @@ const ManageCategory = () => {
           </div>
         </div>
       </div>
-    </Base>
+    </AdminBase>
   );
 };
 
