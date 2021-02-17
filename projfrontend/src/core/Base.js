@@ -9,11 +9,9 @@ import AdminSidenav from "./AdminSidenav";
 const Base = ({ title = "page title", children }) => {
   return (
     <div className="base">
-      {(isAuthenticated()?.user?.role !== 1) && (
               <Menu></Menu>
-      )}
-      <div className={"jumbotron bg-light text-white text-center rounded-0 p-0" + (isAuthenticated()?.user?.role === 1 ? ' d-none': '')}>
-        { title === 'Home page' && isAuthenticated()?.user?.role !== 1 && (
+      <div className={"jumbotron bg-light text-white text-center rounded-0 p-0"}>
+        { title === 'Home page' && (
           <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
@@ -33,30 +31,16 @@ const Base = ({ title = "page title", children }) => {
           </a>
         </div>
         )}
-        {title !== 'Home page' && isAuthenticated()?.user?.role !== 1 && (
+        {title !== 'Home page' && (
           <div className="otherpage-banner">
             <h2 className="display-3">{title}</h2>
           </div>
           )
         }
         </div>
-      
-      { isAuthenticated() && isAuthenticated().user.role === 1 && (
-        <div className="Admin-screen">
-          <AdminSidenav></AdminSidenav>
-          <div className="main-content">
-          <div className="admin-header bg-light">
-              <h2>{title}</h2>
-          </div>{children}</div>
+        <div className="main-content">
+          {children}
         </div>
-      )}
-      {
-        isAuthenticated().user?.role !== 1 && (
-          <div className="main-content">
-            {children}
-          </div>
-        )
-      }
      
       {/* footer */}
       <Footer>
