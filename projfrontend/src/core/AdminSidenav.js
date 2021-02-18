@@ -30,9 +30,11 @@ const AdminSidenav = () => {
                     <li className="list-group-item">
                         <Link to="/admin/products" style={currentLink(history,'/admin/products')}>Manage Products</Link>
                     </li>
-                    {/* <li className="list-group-item">Manage Orders</li> */}
-                </ul>
-                <button
+                    <li className="list-group-item">
+                        <Link to="/admin/products" style={currentLink(history,'/admin/orders')}>Manage Orders</Link>
+                    </li>
+                    <li className="pl-3 pt-5">
+                    <button
                     className="btn btn-light btn-sm"
                     onClick={() => {
                         signout(() => {
@@ -46,8 +48,11 @@ const AdminSidenav = () => {
                         <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
                     </svg>
                     </span>
-                    sign out
+                    Sign out
                     </button>
+                    </li>
+                </ul>
+                
             </div>
         </div>
     )

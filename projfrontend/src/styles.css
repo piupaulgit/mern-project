@@ -111,3 +111,9 @@ p {
   max-height: 500px;
   overflow-y: auto;
 }
+
+.form-control {
+  border-radius: 0;
+  font-size: 13px;
+  min-height: 40px;
+}
