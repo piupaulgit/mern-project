@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getProducts, deleteProduct } from "./helper/adminapicall";
+import { getProducts, deleteProduct, getCategories } from "./helper/adminapicall";
 import AdminBase from "../core/AdminBase";
 
 const ManageProducts = () => {
@@ -50,6 +50,13 @@ const ManageProducts = () => {
         setProducts(data);
       }
     });
+    getCategories().then((data) => {
+      if (data.error) {
+        setFormValues({ ...formValues, error: data.error });
+      } else {
+        setFormValues({ ...formValues, categories: data, formData: new FormData() });
+      }
+    });
   };
   const deleteThisProduct = (productId) => {
     deleteProduct(user._id, token, productId)
@@ -90,6 +97,7 @@ const ManageProducts = () => {
            <textarea className="form-control" 
            placeholder="Product description"
            name="description" 
+           rows="3"
            onChange={handleChange('description')}
            value={description}></textarea>
         </div>
@@ -99,12 +107,19 @@ const ManageProducts = () => {
             type="file"
             name="photo"
             accept="image"
+            className="form-control"
             placeholder="choose a file"></input>
         </div>
         <div className="form-group">
           <select className="form-control" 
             onChange={handleChange("category")} name="category" placeholder="Product Category">
             <option>Select Category</option>
+            {categories &&
+            categories.map((cate, index) => (
+              <option key={index} value={cate._id}>
+                {cate.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-group">
