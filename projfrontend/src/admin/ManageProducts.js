@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getProducts, deleteProduct, getCategories } from "./helper/adminapicall";
+import { getProducts, deleteProduct, getCategories, addProduct } from "./helper/adminapicall";
 import AdminBase from "../core/AdminBase";
 
 const ManageProducts = () => {
@@ -19,6 +19,7 @@ const ManageProducts = () => {
     category: "",
     loading: false,
     error: "",
+    success: "",
     createdProduct: "",
     getaRedirect: false,
     formData: new FormData(),
@@ -32,6 +33,7 @@ const ManageProducts = () => {
     category,
     loading,
     error,
+    success,
     createdProduct,
     getaRedirect,
     formData,
@@ -41,6 +43,22 @@ const ManageProducts = () => {
     preLoad();
   }, []);
 
+  const showSuccess = () => {
+    if(success){
+      return (
+        <div className="alert alert-success">{success}</div>
+      );
+    }
+  }  
+  
+  const showError = () => {
+    if(error){
+      return (
+        <div className="alert alert-danger">{error}</div>
+      );
+    }
+
+  }
   const preLoad = () => {
     getProducts().then((data) => {
       console.log(data);
@@ -79,7 +97,34 @@ const ManageProducts = () => {
   const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value, error: '', success: '' });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setFormValues({ ...formValues, error: "", loading: true });
+    addProduct(user._id, token, formData)
+      .then((data) => {
+        if (data.error) {
+          setFormValues({ ...formValues, error: data.error });
+        } else {
+          setFormValues({
+            ...formValues,
+            name: "",
+            description: "",
+            price: "",
+            photo: "",
+            stock: "",
+            error: '',
+            success: `${data.name} successfully added`,
+            loading: false,
+            createdProduct: data.name,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const createForm = () =>
@@ -137,7 +182,7 @@ const ManageProducts = () => {
           value={stock} 
           placeholder="Stock" className="form-control"></input>
         </div>
-        <button className="btn btn-dark">Add</button>
+        <button className="btn btn-dark" onClick={onSubmit}>Add</button>
       </form>
     )
   
@@ -203,6 +248,8 @@ const ManageProducts = () => {
                 </button>
               </div>
               <div class="modal-body">
+                {showSuccess()}
+                {showError()}
                {createForm()}
               </div>
             </div>
