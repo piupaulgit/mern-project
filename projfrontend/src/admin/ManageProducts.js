@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
 import { getProducts, deleteProduct, getCategories, addProduct } from "./helper/adminapicall";
 import AdminBase from "../core/AdminBase";
+import { API } from "../backend";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -161,15 +162,23 @@ const ManageProducts = () => {
            onChange={handleChange('description')}
            value={description}></textarea>
         </div>
-        <div className="form-group">
-          <input 
-            onChange={handleChange("photo")}
-            type="file"
-            name="photo"
-            accept="image"
-            className="form-control"
-            placeholder="choose a file"></input>
-        </div>
+        {modalType === 'add' && (
+          <div className="form-group">
+            <input 
+              onChange={handleChange("photo")}
+              type="file"
+              name="photo"
+              accept="image"
+              className="form-control"
+              placeholder="choose a file"></input>
+          </div>
+        )}
+        { modalType === 'edit' && (
+          <div className="form-group product-image-holder">
+            <img src={`${API}/product/photo/${currentProduct._id}`} className="product-img"></img>
+            <input type="file" placeholder="change Image"></input>
+          </div>
+        )}
         <div className="form-group">
           <select className="form-control" 
             onChange={handleChange("category")} name="category" placeholder="Product Category">
@@ -197,7 +206,9 @@ const ManageProducts = () => {
           value={stock} 
           placeholder="Stock" className="form-control"></input>
         </div>
-        <button className="btn btn-dark" onClick={onSubmit}>Add</button>
+        <button className="btn btn-dark text-capitalize" onClick={onSubmit}>
+          {modalType}
+        </button>
       </form>
     )
   
