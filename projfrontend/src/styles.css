@@ -127,7 +127,13 @@ p {
   position: relative;
 }
 .product-image-holder input {
+  border: 1px solid red;
+  height: 42px;
+  opacity: 0;
+}
+.product-image-holder input,
+.product-image-holder .upload-btn {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 0;
+  top: 0;
 }
