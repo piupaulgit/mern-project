@@ -9,6 +9,7 @@ const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [modalType, setModalType] = useState('add')
   const { user, token } = isAuthenticated();
+  const [currentProduct, setCurrentProduct] = useState({})
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -90,8 +91,17 @@ const ManageProducts = () => {
       });
   };
 
-  const openModal = () => {
-
+  const openModal = (modalType,product) => {
+    setModalType(modalType)
+    if(modalType === 'edit'){
+      setCurrentProduct(product)
+      setFormValues({...formValues, 
+        name:product.name,
+        description:product.description,
+        price: product.price,
+        stock: product.stock
+      })
+    }
   }
 
   const handleChange = (name) => (event) => {
@@ -126,6 +136,11 @@ const ManageProducts = () => {
         console.log(err);
       });
   };
+
+  const openDeleteModal = (product) => {
+    setCurrentProduct(product)
+    setFormValues({...formValues, error: '', success: ''})
+  }
 
   const createForm = () =>
     (
@@ -230,7 +245,7 @@ const ManageProducts = () => {
        <div className="container-fluid p-5">
           <div className="d-flex aling-items-center justify-content-between">
             <h2 className="heading mb-0">Product List</h2>
-            <button className="btn btn-yellow" data-toggle="modal" data-target="#productModal" onClick={openModal}>Add New Product</button>
+            <button className="btn btn-yellow" data-toggle="modal" data-target="#productModal" onClick={() => openModal('add')}>Add New Product</button>
           </div>
           <div className="scrallable-div mt-4">
             <table className="table border">
@@ -252,7 +267,7 @@ const ManageProducts = () => {
                       <td>{product.stock}</td>
                       <td>{product.sold}</td>
                       <td>
-                        <button className="btn btn-sm mr-2 btn-success">
+                        <button className="btn btn-sm mr-2 btn-success" onClick={() => openModal('edit',product)} data-toggle="modal" data-target="#productModal" >
                             <span>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -260,7 +275,7 @@ const ManageProducts = () => {
                               </svg>
                             </span>Edit
                         </button>
-                        <button className="btn btn-danger btn-sm">
+                        <button className="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteProduct" onClick={() => openDeleteModal(product)}>
                             <span>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -285,8 +300,8 @@ const ManageProducts = () => {
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="productModal">
-                  { modalType === 'add' ? "Add New Product" : "Edit Product"}
+                <h5 class="modal-title" id="productModal" className="text-capitalize">
+                  { modalType } Product
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -296,6 +311,22 @@ const ManageProducts = () => {
                 {showSuccess()}
                 {showError()}
                {createForm()}
+              </div>
+            </div>
+          </div>
+        </div>
+         {/* delete pop up */}
+         <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                {/* {successMsg()}
+                {errorMsg()} */}
+                <p>Do you really want to delete </p>
+                <div className="d-flex justify-content-end">
+                  <button className="btn btn-primary btn-sm mr-2" data-dismiss="modal" aria-label="Close" id="closeDeleteModal">Cancel</button>
+                  <button className="btn btn-danger btn-sm">Delete</button>
+                </div>
               </div>
             </div>
           </div>
