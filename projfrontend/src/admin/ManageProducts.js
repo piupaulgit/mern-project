@@ -103,6 +103,23 @@ const ManageProducts = () => {
         stock: product.stock
       })
     }
+    else if(modalType === 'add'){
+      setFormValues({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+        photo: "",
+        categories: [],
+        category: "",
+        loading: false,
+        error: "",
+        success: "",
+        createdProduct: "",
+        getaRedirect: false,
+        formData: new FormData(),
+      })
+    }
   }
 
   const handleChange = (name) => (event) => {
