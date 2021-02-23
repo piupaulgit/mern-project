@@ -104,21 +104,21 @@ const ManageProducts = () => {
       })
     }
     else if(modalType === 'add'){
-      setFormValues({
-        name: "",
-        description: "",
-        price: "",
-        stock: "",
-        photo: "",
-        categories: [],
-        category: "",
-        loading: false,
-        error: "",
-        success: "",
-        createdProduct: "",
-        getaRedirect: false,
-        formData: new FormData(),
-      })
+      // setFormValues({
+      //   name: "",
+      //   description: "",
+      //   price: "",
+      //   stock: "",
+      //   photo: "",
+      //   categories: [categories],
+      //   category: '',
+      //   loading: false,
+      //   error: "",
+      //   success: "",
+      //   createdProduct: "",
+      //   getaRedirect: false,
+      //   formData: new FormData(),
+      // })
     }
   }
 
@@ -206,7 +206,7 @@ const ManageProducts = () => {
           </div>
         )}
         <div className="form-group">
-          <select className="form-control" 
+          <select className="form-control"  value={currentProduct.category}
             onChange={handleChange("category")} name="category" placeholder="Product Category">
             <option>Select Category</option>
             {categories &&
