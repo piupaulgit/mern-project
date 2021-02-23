@@ -61,7 +61,8 @@ const ManageProducts = () => {
     }
 
   }
-  const preLoad = () => {
+
+  const getAllProducts = () =>{
     getProducts().then((data) => {
       console.log(data);
       if (data.error) {
@@ -70,6 +71,9 @@ const ManageProducts = () => {
         setProducts(data);
       }
     });
+  }
+  const preLoad = () => {
+    getAllProducts()
     getCategories().then((data) => {
       if (data.error) {
         setFormValues({ ...formValues, error: data.error });
@@ -100,25 +104,25 @@ const ManageProducts = () => {
         name:product.name,
         description:product.description,
         price: product.price,
-        stock: product.stock
+        stock: product.stock,
+        category:product.category
       })
     }
     else if(modalType === 'add'){
-      // setFormValues({
-      //   name: "",
-      //   description: "",
-      //   price: "",
-      //   stock: "",
-      //   photo: "",
-      //   categories: [categories],
-      //   category: '',
-      //   loading: false,
-      //   error: "",
-      //   success: "",
-      //   createdProduct: "",
-      //   getaRedirect: false,
-      //   formData: new FormData(),
-      // })
+      setFormValues({...formValues,
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+        photo: "",
+        category: '',
+        loading: false,
+        error: "",
+        success: "",
+        createdProduct: "",
+        getaRedirect: false,
+        formData: new FormData(),
+      })
     }
   }
 
@@ -148,6 +152,7 @@ const ManageProducts = () => {
             loading: false,
             createdProduct: data.name,
           });
+        getAllProducts()
         }
       })
       .catch((err) => {
@@ -206,7 +211,7 @@ const ManageProducts = () => {
           </div>
         )}
         <div className="form-group">
-          <select className="form-control"  value={currentProduct.category}
+          <select className="form-control"  value={category}
             onChange={handleChange("category")} name="category" placeholder="Product Category">
             <option>Select Category</option>
             {categories &&
