@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
-import { getProducts, deleteProduct, getCategories, addProduct } from "./helper/adminapicall";
+import { getProducts, deleteProduct, getCategories, addProduct, updateProduct } from "./helper/adminapicall";
 import AdminBase from "../core/AdminBase";
 import { API } from "../backend";
 
@@ -134,30 +134,40 @@ const ManageProducts = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setFormValues({ ...formValues, error: "", loading: true });
-    addProduct(user._id, token, formData)
-      .then((data) => {
-        if (data.error) {
-          setFormValues({ ...formValues, error: data.error });
-        } else {
-          setFormValues({
-            ...formValues,
-            name: "",
-            description: "",
-            price: "",
-            photo: "",
-            stock: "",
-            error: '',
-            success: `${data.name} successfully added`,
-            loading: false,
-            createdProduct: data.name,
-          });
-        getAllProducts()
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if(modalType === 'add'){
+      setFormValues({ ...formValues, error: "", success: '', loading: true });
+      addProduct(user._id, token, formData)
+        .then((data) => {
+          if (data.error) {
+            setFormValues({ ...formValues, error: data.error });
+          } else {
+            setFormValues({
+              ...formValues,
+              name: "",
+              description: "",
+              price: "",
+              photo: "",
+              stock: "",
+              error: '',
+              success: `${data.name} successfully added`,
+              loading: false,
+              createdProduct: data.name,
+            });
+            getAllProducts()
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+      else if(modalType === 'edit'){
+        console.log(user._id, token, currentProduct._id, currentProduct)
+        updateProduct(user._id, token, currentProduct._id, currentProduct).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      }
   };
 
   const openDeleteModal = (product) => {

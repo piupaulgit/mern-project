@@ -107,21 +107,19 @@ export const getProduct = (productId) => {
 
 // update product
 export const updateProduct = (userId, token, productId, product) => {
-  return fetch(`${API}/product/${productId}/${userId}}`, {
-    method: "POST",
+  return fetch(`${API}/product/${productId}/${userId}`, {
+    method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: product,
-  })
-    .then((res) => {
+    body: JSON.stringify(product),
+  }).then((res) => {
       return res.json();
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.log(err);
-    });
+    });;
 };
 
 // delete product
