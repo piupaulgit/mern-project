@@ -25,9 +25,6 @@ const AdminSidenav = () => {
                         <Link to="/admin/categories" style={currentLink(history,'/admin/categories')}>Manage Category</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/create/product" style={currentLink(history,'/admin/create/product')}>Create Product</Link>
-                    </li>
-                    <li className="list-group-item">
                         <Link to="/admin/products" style={currentLink(history,'/admin/products')}>Manage Products</Link>
                     </li>
                     <li className="list-group-item">

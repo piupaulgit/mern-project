@@ -125,6 +125,8 @@ p {
 
 .product-image-holder {
   position: relative;
+  min-height: 42px;
+  margin-top: 10px;
 }
 .product-image-holder input {
   border: 1px solid red;
@@ -134,7 +136,7 @@ p {
 .product-image-holder input,
 .product-image-holder .upload-btn {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
 }
 

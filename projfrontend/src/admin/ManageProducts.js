@@ -82,13 +82,16 @@ const ManageProducts = () => {
       }
     });
   };
-  const deleteThisProduct = (productId) => {
-    deleteProduct(user._id, token, productId)
+  const deleteThisProduct = () => {
+    deleteProduct(user._id, token, currentProduct._id)
       .then((data) => {
         if (data.error) {
           console.log(data.error);
         } else {
-          preLoad();
+          setTimeout(() => {
+            document.getElementById('closeDeleteModal').click()
+          },200)
+         getAllProducts()
         }
       })
       .catch((err) => {
@@ -100,7 +103,6 @@ const ManageProducts = () => {
     setModalType(modalType)
     setCurrentProduct(product)
     if(modalType === 'edit'){
-      console.log('eitytt')
       setFormValues({...formValues, 
         name:product.name,
         description:product.description,
@@ -166,7 +168,14 @@ const ManageProducts = () => {
       else if(modalType === 'edit'){
         console.log(formData)
         updateProduct(user._id, token, currentProduct._id, formData).then(res => {
-          console.log(res)
+          if (res.error) {
+            setFormValues({ ...formValues, error: res.error });
+          } 
+          else{
+            getAllProducts()
+            setFormValues({ ...formValues, error:'', success: 'Product successfully updated.' });
+          }
+         
         }).catch(err => {
           console.log(err)
         })
@@ -209,18 +218,20 @@ const ManageProducts = () => {
           </div>
         )}
         { modalType === 'edit' && (
-          <div className="form-group product-image-holder">
+          <div className="form-group">
             <img src={`${API}/product/photo/${currentProduct._id}`} className="product-img"></img>
-            <button className="btn btn-primary upload-btn btn-small">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
-                  <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                  <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
-                </svg>
-              </span>
-              Change Image
-            </button>
-            <input type="file" placeholder="change Image"></input>
+            <div className="product-image-holder">
+              <button className="btn btn-primary upload-btn btn-small">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                  </svg>
+                </span>
+                Change Image
+              </button>
+              <input type="file" placeholder="change Image"></input>
+            </div>
           </div>
         )}
         <div className="form-group">
@@ -257,45 +268,6 @@ const ManageProducts = () => {
     )
   
   return (
-    // <Base titlt="Manage Product">
-    //   <div className="container bg-info p-4 my-4">
-    //     <Link to="/admin/dashboard" className="btn btn-warning mb-3">
-    //       Go back to admin dashboard
-    //     </Link>
-    //     <div className="row p-4">
-    //       <div className="col-md-12">
-    //         <table className="table bg-light">
-    //           <tbody>
-    //             {products.map((item, index) => {
-    //               return (
-    //                 <tr key={index}>
-    //                   <td>{item.name}</td>
-    //                   <td>
-    //                     <Link
-    //                       to={`/admin/product/${item._id}`}
-    //                       className="btn btn-success"
-    //                     >
-    //                       Update
-    //                     </Link>
-    //                   </td>
-    //                   <td>
-    //                     <button
-    //                       to="/"
-    //                       className="btn btn-danger"
-    //                       onClick={() => deleteThisProduct(item._id)}
-    //                     >
-    //                       Delete
-    //                     </button>
-    //                   </td>
-    //                 </tr>
-    //               );
-    //             })}
-    //           </tbody>
-    //         </table>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </Base>
     <AdminBase title="Manage products">
        <div className="container-fluid p-5">
           <div className="d-flex aling-items-center justify-content-between">
@@ -380,7 +352,7 @@ const ManageProducts = () => {
                 <p>Do you really want to delete </p>
                 <div className="d-flex justify-content-end">
                   <button className="btn btn-primary btn-sm mr-2" data-dismiss="modal" aria-label="Close" id="closeDeleteModal">Cancel</button>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button className="btn btn-danger btn-sm" onClick={deleteThisProduct}>Delete</button>
                 </div>
               </div>
             </div>
