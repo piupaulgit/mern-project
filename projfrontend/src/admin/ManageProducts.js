@@ -98,14 +98,16 @@ const ManageProducts = () => {
 
   const openModal = (modalType,product) => {
     setModalType(modalType)
+    setCurrentProduct(product)
     if(modalType === 'edit'){
-      setCurrentProduct(product)
+      console.log('eitytt')
       setFormValues({...formValues, 
         name:product.name,
         description:product.description,
         price: product.price,
         stock: product.stock,
-        category:product.category
+        category:product.category,
+        formData: new FormData(),
       })
     }
     else if(modalType === 'add'){
@@ -136,6 +138,7 @@ const ManageProducts = () => {
     event.preventDefault();
     if(modalType === 'add'){
       setFormValues({ ...formValues, error: "", success: '', loading: true });
+      console.log(formData)
       addProduct(user._id, token, formData)
         .then((data) => {
           if (data.error) {
@@ -161,8 +164,8 @@ const ManageProducts = () => {
         });
       }
       else if(modalType === 'edit'){
-        console.log(user._id, token, currentProduct._id, currentProduct)
-        updateProduct(user._id, token, currentProduct._id, currentProduct).then(res => {
+        console.log(formData)
+        updateProduct(user._id, token, currentProduct._id, formData).then(res => {
           console.log(res)
         }).catch(err => {
           console.log(err)

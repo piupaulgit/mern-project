@@ -111,15 +111,14 @@ export const updateProduct = (userId, token, productId, product) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(product),
+    body: product,
   }).then((res) => {
       return res.json();
     }).catch((err) => {
       console.log(err);
-    });;
+    });
 };
 
 // delete product
