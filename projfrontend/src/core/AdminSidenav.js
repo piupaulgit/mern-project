@@ -35,7 +35,7 @@ const AdminSidenav = () => {
                     className="btn btn-light btn-sm"
                     onClick={() => {
                         signout(() => {
-                        history.push("/");
+                            history.push("/");
                         });
                     }}
                     >
