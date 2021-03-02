@@ -118,7 +118,7 @@ const Signup = () => {
           <div className="col-md-5 mx-auto p-5 mb-4 bg-light form-card">
             <h1 className="heading text-center mb-2">Register</h1>
             {signupForm()}
-            <p className="text-center py-3">Already have an account? <Link to="/signin">Login Now</Link>.</p>
+            <p className="text-center pt-3 mb-0">Already have an account? <Link to="/signin">Login Now</Link>.</p>
           </div>
         </div>
       </div>
