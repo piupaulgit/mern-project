@@ -108,6 +108,7 @@ const Signin = () => {
           <div className="col-md-5 mx-auto p-5 mb-4 bg-light form-card">
             <h1 className="text-center mb-2 heading">Login</h1>
             {signupIn()}
+            <p className="text-center py-3">Don't have an account? <Link to="/signup">Register Now</Link>.</p>
             {performRedirect()}
           </div>
         </div>
