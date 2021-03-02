@@ -1,15 +1,10 @@
 .product-card {
   border: 0;
   background-color: #f6f6f6;
-  border-radius: 10px;
+  border-radius: 3px;
   padding: 20px;
   position: relative;
-  &:hover {
-    &:after {
-      transition: all 0.5s;
-      opacity: 1;
-    }
-  }
+  height: 270px;
   &:after {
     border-radius: 10px;
     transition: all 0.5s;
@@ -22,12 +17,37 @@
     background-color: rgba(0, 0, 0, 0.6);
     content: "";
   }
+  img {
+    transition: all 0.5s;
+  }
+  &:hover {
+    img {
+      -moz-transform: scale(-1, 1);
+      -o-transform: scale(-1, 1);
+      -webkit-transform: scale(-1, 1);
+      transform: scale(-1, 1);
+    }
+  }
 }
 
 .product-link {
   position: relative;
   display: block;
   overflow: hidden;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+
+  .card-title {
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+  }
+  .price {
+    font-weight: bold;
+    font-size: 17px;
+    color: #6e6c3c;
+    margin-bottom: 0;
+  }
   &:hover {
     text-decoration: none;
     // color: #333;
