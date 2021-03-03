@@ -13,7 +13,7 @@ const SingleProduct = () => {
             setProductDetail(res)
         })
         loadAllProduct();
-    }, [])
+    }, [productId])
     
       const loadAllProduct = () => [
         getAllProducts()
@@ -41,7 +41,7 @@ const SingleProduct = () => {
                                     {
                                         products && products.map((item, index) => {
                                             return (
-                                                <Link to={`/product/${item._id}`} className="each-product row py-1 px-1 align-items-center" key={index}>
+                                                <Link to={`/product/${item._id}`} className="each-product row py-2 px-1 align-items-center" key={index}>
                                                     <div className="col-md-5">
                                                         <ImageHelper product={item}></ImageHelper>
                                                     </div>
@@ -53,7 +53,7 @@ const SingleProduct = () => {
                                             )
                                         })
                                     }
-                                    <Link to="/" className="btn btn-block btn-dark mt-2">View all products</Link>
+                                    <Link to="/" className="btn btn-block btn-dark mt-2 rounded-0">View all products</Link>
                                 </div>
                             </div>
                         </div>
