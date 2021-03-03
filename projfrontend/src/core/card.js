@@ -49,7 +49,7 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
     );
   };
   return (
-    <Link to="/" className="product-link"> 
+    <Link to={`/product/${product._id}`} className="product-link"> 
         <div className="card product-card">
           {getARedirect(redirect)}
           <ImageHelper product={product} />
