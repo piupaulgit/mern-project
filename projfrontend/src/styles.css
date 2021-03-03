@@ -143,3 +143,11 @@ p {
 select {
   text-transform: capitalize;
 }
+
+.each-product {
+  color: #333;
+}
+
+.each-product:hover {
+  text-decoration: none;
+}

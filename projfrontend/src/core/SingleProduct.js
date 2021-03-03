@@ -1,22 +1,62 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Base from './Base'
-import { getSingleProduct } from './helper/coreapicalls';
+import { getAllProducts, getSingleProduct } from './helper/coreapicalls';
 import ImageHelper from './helper/ImageHelper';
 
 const SingleProduct = () => {
     const productId = useParams().id;
     const [productDetail, setProductDetail] = useState({})
+    const [products, setProducts] = useState([]);
     useEffect(() => {
         getSingleProduct(productId).then(res => {
             setProductDetail(res)
         })
+        loadAllProduct();
     }, [])
+    
+      const loadAllProduct = () => [
+        getAllProducts()
+          .then((data) => {
+            if (data.error) {
+              console.log(data.error);
+            } else {
+              setProducts(data);
+              console.log(data);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          }),
+      ];
     return (
         <div className="single-product">
             <Base title={productDetail.name}>
                 <div className="container">
                     <div className="row">
+                    <div className="col-md-3">
+                            <div className="border">
+                                <strong className="bg-light p-2 d-block">Propular Products</strong>
+                                <div>
+                                    {
+                                        products && products.map((item, index) => {
+                                            return (
+                                                <Link to={`/product/${item._id}`} className="each-product row py-1 px-1 align-items-center" key={index}>
+                                                    <div className="col-md-5">
+                                                        <ImageHelper product={item}></ImageHelper>
+                                                    </div>
+                                                    <div className="col-md-7">
+                                                        <small className="d-block">{item.name}</small>
+                                                        <strong>₹ {item.price}</strong>
+                                                    </div>
+                                                </Link> 
+                                            )
+                                        })
+                                    }
+                                    <Link to="/" className="btn btn-block btn-dark mt-2">View all products</Link>
+                                </div>
+                            </div>
+                        </div>
                         <div className="col-md-4">
                             <div className="product-image border">
                                 <ImageHelper product={productDetail} />
@@ -29,12 +69,7 @@ const SingleProduct = () => {
                             <strong>Category: Need to work</strong>
                             <div className="mt-4">
                                 <button className="btn btn-yellow mr-3">Add to Card</button>
-                                <button className="btn btn-danger">Add to widhlist</button>
-                            </div>
-                        </div>
-                        <div className="col-md-3">
-                            <div className="border">
-                                <strong className="bg-light p-2 d-block">Propular Products</strong>
+                                <button className="btn btn-danger">Add to Wishlist</button>
                             </div>
                         </div>
                     </div>
