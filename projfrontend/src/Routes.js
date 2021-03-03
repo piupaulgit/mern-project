@@ -14,6 +14,7 @@ import ManageCategory from "./admin/ManageCategory";
 import Cart from "./core/Cart";
 import About from "./core/About";
 import AdminDashboard from "./user/AdminDashboard";
+import SingleProduct from "./core/SingleProduct";
 
 const Routes = () => {
   return (
@@ -23,6 +24,7 @@ const Routes = () => {
         <Route path="/about" exact component={About} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
+        <Route path="/product/:id" exact component={SingleProduct} />
         <PrivateRoute
           path="/user/dashboard"
           exact
