@@ -36,13 +36,13 @@ const SingleProduct = () => {
                     <div className="row">
                     <div className="col-md-3">
                             <div className="border">
-                                <strong className="bg-light p-2 d-block">Propular Products</strong>
+                                <strong className="bg-light p-2 d-block mb-2">Propular Products</strong>
                                 <div>
                                     {
                                         products && products.map((item, index) => {
                                             return (
-                                                <Link to={`/product/${item._id}`} className="each-product row py-2 px-1 align-items-center" key={index}>
-                                                    <div className="col-md-5">
+                                                <Link to={`/product/${item._id}`} className="each-product row py-1 border-bottom m-0 px-1 align-items-center" key={index}>
+                                                    <div className="col-md-5 pl-0">
                                                         <ImageHelper product={item}></ImageHelper>
                                                     </div>
                                                     <div className="col-md-7">
@@ -67,6 +67,14 @@ const SingleProduct = () => {
                             <strong>Price: ₹ {productDetail.price}</strong>
                             <p className="pt-2">{productDetail.description}</p>
                             <strong>Category: Need to work</strong>
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <div className="form-group mt-3 mb-0">
+                                        <label><small>Quantity</small></label>
+                                        <input type="number" className="form-control" value="0"></input>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="mt-4">
                                 <button className="btn btn-yellow mr-3">Add to Card</button>
                                 <button className="btn btn-danger">Add to Wishlist</button>
