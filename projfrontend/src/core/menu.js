@@ -106,6 +106,11 @@ const Menu = ({ history }) => {
             </Link>
           </li>
           <li className="nav-item">
+          <Link to="/products" className="nav-link" style={currentLink(history, "/products",  "#bada55", "#333")}>
+              Products
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link
               to="/cart"
               className="nav-link cart-related"
