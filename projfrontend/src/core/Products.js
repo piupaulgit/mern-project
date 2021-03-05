@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getCategories } from '../admin/helper/adminapicall';
 import Base from './Base'
 import Card from './Card';
+import CategoryWidget from './components/CategoryWidget';
 import { getAllProducts, getProductsByCategory } from './helper/coreapicalls';
 
 const Products = () => {
@@ -12,7 +13,6 @@ const Products = () => {
     useEffect(() => {
        getCategories().then(res => {
            setCategories(res)
-           console.log(categoryName)
            if(categoryName){
                 const catId = res.filter(item => item.name === categoryName)
                 getProductsByCategory(catId[0]._id).then(res => {
@@ -33,16 +33,7 @@ const Products = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-3">
-                            <div className="border">
-                                <strong className="bg-light p-2 d-block mb-1">Categories</strong>
-                                <div>
-                                    {categories && categories.map((category, index) => {
-                                        return (
-                                            <Link key={index} to={`/category/${category.name}`} className="category-link">{category.name}</Link>
-                                        )
-                                    })}
-                                </div>
-                            </div>
+                            <CategoryWidget categories={categories}></CategoryWidget>
                         </div>
                         <div className="col-md-9">
                             {categoryName && <h6 className="mb-3 text-capitalize">Category: {categoryName}</h6>}

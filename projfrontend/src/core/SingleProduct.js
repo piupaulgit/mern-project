@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { getCategories } from '../admin/helper/adminapicall';
 import Base from './Base'
+import CategoryWidget from './components/CategoryWidget';
 import { getAllProducts, getSingleProduct } from './helper/coreapicalls';
 import ImageHelper from './helper/ImageHelper';
 
@@ -8,7 +10,11 @@ const SingleProduct = () => {
     const productId = useParams().id;
     const [productDetail, setProductDetail] = useState({})
     const [products, setProducts] = useState([]);
+    const [categories , setCategories] = useState([]);
     useEffect(() => {
+        getCategories().then(res => {
+            setCategories(res)
+        })
         getSingleProduct(productId).then(res => {
             setProductDetail(res)
         })
@@ -35,7 +41,7 @@ const SingleProduct = () => {
                 <div className="container">
                     <div className="row">
                     <div className="col-md-3">
-                            <div className="border mb-5">
+                            <div className="border mb-3">
                                 <strong className="bg-light p-2 d-block mb-2">Propular Products</strong>
                                 <div>
                                     {
@@ -56,6 +62,7 @@ const SingleProduct = () => {
                                     <Link to="/" className="btn btn-block btn-dark mt-2 rounded-0">View all products</Link>
                                 </div>
                             </div>
+                            <CategoryWidget categories={categories}></CategoryWidget>
                         </div>
                         <div className="col-md-4">
                             <div className="product-image border">
