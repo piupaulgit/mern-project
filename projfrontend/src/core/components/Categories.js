@@ -55,7 +55,7 @@ const Categories = () => {
                            {category.map((cat,indx) => {
                               return(
                                 <div className="col-lg-3" key={indx}>
-                                  <Link to="/" className="category-block">
+                                  <Link to={`/category/${cat.name}`} className="category-block">
                                     {cat.name} <br></br>Collection
                                   </Link>
                                 </div>

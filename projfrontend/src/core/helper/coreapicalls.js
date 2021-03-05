@@ -26,3 +26,17 @@ export const getSingleProduct = (productId) => {
       console.log(err);
     });
 };
+
+// get products by category
+
+export const getProductsByCategory = (categoryId) => {
+  return fetch(`${API}/category/products/${categoryId}`, {
+      method: "GET",
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}

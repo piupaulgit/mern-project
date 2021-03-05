@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getCategories } from '../admin/helper/adminapicall';
 import Base from './Base'
 import Card from './Card';
-import { getAllProducts } from './helper/coreapicalls';
+import { getAllProducts, getProductsByCategory } from './helper/coreapicalls';
 
 const Products = () => {
-    const [categpries , setCategories] = useState([]);
+    const [categories , setCategories] = useState([]);
     const [products, setProducts] = useState([])
+    const {categoryName} = useParams();
     useEffect(() => {
        getCategories().then(res => {
            setCategories(res)
+           console.log(categoryName)
+           if(categoryName){
+                const catId = res.filter(item => item.name === categoryName)
+                getProductsByCategory(catId[0]._id).then(res => {
+                    setProducts(res)
+                })
+            }
+            else{
+                getAllProducts().then(res => {
+                    setProducts(res)
+                })
+            }
        });
-       getAllProducts().then(res => {
-           setProducts(res)
-       })
-    }, [])
+      
+    }, [categoryName])
     return (
         <div className="products">
             <Base title="Products">
@@ -25,15 +36,16 @@ const Products = () => {
                             <div className="border">
                                 <strong className="bg-light p-2 d-block mb-1">Categories</strong>
                                 <div>
-                                    {categpries && categpries.map((category, index) => {
+                                    {categories && categories.map((category, index) => {
                                         return (
-                                            <Link key={index} to="/" className="category-link">{category.name}</Link>
+                                            <Link key={index} to={`/category/${category.name}`} className="category-link">{category.name}</Link>
                                         )
                                     })}
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-9">
+                            {categoryName && <h6 className="mb-3 text-capitalize">Category: {categoryName}</h6>}
                             <div className="row">
                                 {products && products.map((product, index) => {
                                     return (
