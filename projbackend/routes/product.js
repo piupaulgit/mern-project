@@ -11,11 +11,16 @@ const {
   removeProduct,
   getAllproducts,
   getUniqueCategories,
+  getProductsByCategory,
+  getCategoryProducts,
 } = require("../controllers/product");
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
+const { getCategoryById } = require("../controllers/category");
 
 router.param("userId", getUserById);
 router.param("productId", getProductById);
+router.param("categoryId", getCategoryById);
+router.param("categoryIdForProduct", getProductsByCategory);
 router.post(
   "/product/create/:userId",
   isSignedIn,
@@ -50,6 +55,9 @@ router.delete(
 
 // listing route
 router.get("/product", getAllproducts);
+
+// get product by categories
+router.get("/category/products/:categoryIdForProduct", getCategoryProducts)
 
 // get unique categories
 router.get("/product/category", getUniqueCategories);

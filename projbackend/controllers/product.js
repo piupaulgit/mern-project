@@ -8,7 +8,6 @@ const { runInNewContext } = require("vm");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
-    .populate("category")
     .exec((err, product) => {
       if (err) {
         return res.status(400).json({
@@ -175,3 +174,21 @@ exports.getUniqueCategories = (req, res) => {
     res.json(category);
   });
 };
+
+exports.getProductsByCategory = (req,res,next,categoryId) => {
+  Product.find({"category": categoryId})
+  .exec((err, product) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Product not found",
+      });
+    }
+    req.product = product;
+    next();
+  });
+}
+
+exports.getCategoryProducts = (req,res) => {
+  return res.json(req.product);
+}
+
