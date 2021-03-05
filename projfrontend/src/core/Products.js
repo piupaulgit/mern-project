@@ -46,6 +46,13 @@ const Products = () => {
                         </div>
                         <div className="col-md-9">
                             {categoryName && <h6 className="mb-3 text-capitalize">Category: {categoryName}</h6>}
+                            {
+                                products.length === 0 ? 
+                                    <div className="alert alert-danger">
+                                        No Product found.
+                                    </div>
+                                    : ''
+                            }
                             <div className="row">
                                 {products && products.map((product, index) => {
                                     return (
