@@ -35,7 +35,7 @@ const SingleProduct = () => {
                 <div className="container">
                     <div className="row">
                     <div className="col-md-3">
-                            <div className="border">
+                            <div className="border mb-5">
                                 <strong className="bg-light p-2 d-block mb-2">Propular Products</strong>
                                 <div>
                                     {
