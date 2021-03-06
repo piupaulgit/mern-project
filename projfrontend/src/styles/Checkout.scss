@@ -1,0 +1,38 @@
+.checkout {
+  .user-info {
+    min-height: 100vh;
+    .user-info-holder {
+      max-width: 80%;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      margin: 0 auto;
+    }
+  }
+  .cart-info {
+    background-color: #f1f0eb;
+    min-height: 100vh;
+    border-left: 1px solid #e2e2e2;
+    .cart-info-holder {
+      max-width: 90%;
+      padding-top: 80px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.breadcrumb {
+  li {
+    span {
+      font-size: 12px;
+    }
+    a {
+      font-size: 12px;
+    }
+  }
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "\02F2";
+  vertical-align: top;
+  font-size: 26px;
+  line-height: 5px;
+}

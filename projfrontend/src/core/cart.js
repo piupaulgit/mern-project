@@ -82,10 +82,29 @@ const Cart = () => {
                   {products.length > 0 ? (
                     loadProducts(products)
                   ) : (
-                    <h3>No Product in the cart</h3>
+                    <tr>
+                        <td colSpan="5" className="text-center py-5">
+                          No product found in your cart.
+                        </td>
+                    </tr>
                   )}
               </tbody>
             </table>
+          </div>
+        </div>
+        <div className="row mt-4 mb-5">
+          <div className="col-md-6">
+            <Link to="/products" className="btn btn-yellow">Continue Shopping</Link>
+          </div>
+          <div className="col-md-6">
+              <div className="bg-light p-5">
+                <div className="bg-white p-4">
+                    <h4 className="d-flex justify-content-between">Subtotal <strong className="text-info">3444.00</strong></h4>
+                    <hr></hr>
+                    <p className="mb-5"><i>Shipping & taxes calculated at checkout</i></p>
+                    <Link to="/checkout" className="btn btn-dark text-uppercase">proceed to checkout</Link>
+                </div>
+              </div>
           </div>
         </div>
       </div>
