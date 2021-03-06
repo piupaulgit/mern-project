@@ -49,7 +49,8 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
     );
   };
   return (
-    <Link to={`/product/${product._id}`} className="product-link"> 
+   <div className="each-card-holder">
+      <Link to={`/product/${product._id}`} className="product-link"> 
         <div className="card product-card">
           {getARedirect(redirect)}
           <ImageHelper product={product} />
@@ -58,16 +59,17 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload = v
           <h5 className="card-title text-capitalize mb-0">{cartTitle}</h5>
           <p className="price">₹ {cartPrice}</p>
         </div>
-        <div className="add-to-cart">
-          {showAddToCart(addtoCart)}
-          <button className="btn btn-danger text-light">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-              <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-            </svg>
-          </button>
-          {showRemoveFromCart(removeFromCart)}
-        </div>
     </Link>
+    <div className="add-to-cart">
+        {showAddToCart(addtoCart)}
+        <button className="btn btn-danger text-light">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+          </svg>
+        </button>
+        {showRemoveFromCart(removeFromCart)}
+      </div>
+   </div>
   );
 };
 

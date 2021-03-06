@@ -168,3 +168,25 @@ select {
   text-decoration: none;
   background-color: #f1f1f1;
 }
+
+.small-input {
+  width: 120px;
+}
+
+.cart-product-img {
+  width: 70px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.cart-product-img + span {
+  text-transform: capitalize;
+  color: #333;
+}
+
+.cart-table a:hover {
+  text-decoration: none;
+}
+.cart-table td {
+  vertical-align: middle;
+}

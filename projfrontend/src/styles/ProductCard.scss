@@ -68,3 +68,22 @@
     }
   }
 }
+
+.each-card-holder {
+  position: relative;
+  overflow: hidden;
+  .add-to-cart {
+    top: -30%;
+    transition: all 0.5s;
+  }
+  &:hover {
+    .add-to-cart {
+      top: 36%;
+    }
+  }
+  .add-to-cart {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+  }
+}
