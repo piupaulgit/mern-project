@@ -36,7 +36,7 @@ const Checkout = () => {
                                                 <small>Keep me up to date on news and exclusive offers</small>
                                             </label>
                                         </div>
-                                        <h6 className="font-weight-light">Shipping address</h6>
+                                        <h6 className="font-weight-light">Shipping Address</h6>
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="form-group">
