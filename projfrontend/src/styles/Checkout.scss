@@ -22,6 +22,11 @@
 
 .breadcrumb {
   li {
+    cursor: pointer;
+    &.active {
+      color: #007bff;
+      text-decoration: underline;
+    }
     span {
       font-size: 12px;
     }
@@ -35,4 +40,42 @@
   vertical-align: top;
   font-size: 26px;
   line-height: 5px;
+}
+
+.tabContent {
+  display: none;
+}
+.tabContent.active {
+  display: block;
+}
+
+.item-image {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  border: 1px solid #a9a2a2;
+  border-radius: 4px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 15px;
+  span {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+  }
+  img {
+  }
+}
+
+.coupon-input {
+  min-height: 43px !important;
 }

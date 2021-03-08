@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/Checkout.scss";
 const Checkout = () => {
+    const [activeNav, setActiveNav] = useState('information')
+    const changeTab = (tabname) => {
+        setActiveNav(tabname)
+    }
     return (
         <div className="checkout">
             <div className="container-fluid">
@@ -11,23 +15,23 @@ const Checkout = () => {
                             <h2 className="font-weight-light">Complete your order detail</h2>
                             <div>
                                 <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb bg-white p-0">
-                                        <li class="breadcrumb-item">
-                                           <Link to="/cart">Cart</Link>
+                                    <ol className="breadcrumb bg-white p-0">
+                                        <li className="breadcrumb-item">
+                                           <Link to="/cart" className="text-dark">Cart</Link>
                                         </li>
-                                        <li class="breadcrumb-item">
+                                        <li className={`breadcrumb-item ${activeNav === 'information' ? 'active' : ''}`} onClick={() => changeTab('information')}>
                                             <span>Information</span>
                                         </li>
-                                        <li class="breadcrumb-item">
+                                        <li className={`breadcrumb-item ${activeNav === 'shipping' ? 'active' : ''}`} onClick={() => changeTab('shipping')}>
                                             <span>Shipping</span>
                                         </li>
-                                        <li class="breadcrumb-item">
+                                        <li className={`breadcrumb-item ${activeNav === 'payment' ? 'active' : ''}`} onClick={() => changeTab('payment')}>
                                             <span>Payment</span>
                                         </li>
                                     </ol>
                                 </nav>
                                 <div className="mt-5">
-                                    <div className="">
+                                    <div className={`tabContent ${activeNav === 'information' ? 'active' : ''}`} >
                                         <h6 className="font-weight-light">Contact information</h6>
                                         <div className="form-group mb-4">
                                             <input type="tell" className="form-control rounded rounded" placeholder="Mobile Number"/>
@@ -81,12 +85,12 @@ const Checkout = () => {
                                                 <Link to="/cart"><small className="text-capitalize">Return to cart</small></Link>
                                             </div>
                                             <div className="col-md-6 text-right mt-3">
-                                                <button className="btn btn-dark">Continue to Shipping</button>
+                                                <button className="btn btn-dark"  onClick={() => changeTab('shipping')}>Continue to Shipping</button>
                                             </div>
                                         </div>
                                     </div>
                                     {/* information end */}
-                                    <div>
+                                    <div className={`tabContent ${activeNav === 'shipping' ? 'active' : ''}`}>
                                         <div className="border p-3 rounded mt-5 mb-4">
                                             <div className="row">
                                                 <div className="col-md-2">
@@ -96,7 +100,7 @@ const Checkout = () => {
                                                     <small>+91 89898 98989</small>
                                                 </div>
                                                 <div className="col-md-3">
-                                                    <small><Link>Change</Link></small>
+                                                    <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
                                                 </div>
                                             </div>
                                             <hr></hr>
@@ -108,7 +112,7 @@ const Checkout = () => {
                                                     <small>N.C ROAD, SUBHASNAGAR SOUTH, PANIHATI, NTH 24PGS, 700111 GHOLA WB, India</small>
                                                 </div>
                                                 <div className="col-md-3">
-                                                    <small><Link>Change</Link></small>
+                                                    <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,15 +127,15 @@ const Checkout = () => {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-6  mt-3">
-                                                <Link to="/cart"><small className="text-capitalize">Return to information</small></Link>
+                                                <Link><small className="text-capitalize"  onClick={() => changeTab('information')}>Return to information</small></Link>
                                             </div>
                                             <div className="col-md-6 text-right mt-3">
-                                                <button className="btn btn-dark">Continue to Payment</button>
+                                                <button className="btn btn-dark" onClick={() => changeTab('payment')}>Continue to Payment</button>
                                             </div>
                                         </div>
                                     </div>
                                     {/* shipping end */}
-                                    <div>
+                                    <div className={`tabContent ${activeNav === 'payment' ? 'active' : ''}`}>
                                     <div className="border p-3 rounded mt-5 mb-4">
                                         <div className="row">
                                                 <div className="col-md-2">
@@ -141,7 +145,7 @@ const Checkout = () => {
                                                     <small>+91 89898 98989</small>
                                                 </div>
                                                 <div className="col-md-3">
-                                                    <small><Link>Change</Link></small>
+                                                    <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
                                                 </div>
                                         </div>
                                         <hr></hr>
@@ -153,7 +157,7 @@ const Checkout = () => {
                                                     <small>N.C ROAD, SUBHASNAGAR SOUTH, PANIHATI, NTH 24PGS, 700111 GHOLA WB, India</small>
                                                 </div>
                                                 <div className="col-md-3">
-                                                    <small><Link>Change</Link></small>
+                                                    <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
                                                 </div>
                                             </div>
                                         <hr></hr>
@@ -166,8 +170,7 @@ const Checkout = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div>
+                                        <div>
                                         <h6 className="font-weight-light">Payment</h6>
                                         <small>All transactions are secure and encrypted.</small>
                                         <div className="alert alert-warning mt-4">
@@ -179,11 +182,12 @@ const Checkout = () => {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6  mt-3">
-                                            <Link to="/cart"><small className="text-capitalize">Return to Shipping</small></Link>
+                                            <Link><small className="text-capitalize"  onClick={() => changeTab('shipping')}>Return to Shipping</small></Link>
                                         </div>
                                         <div className="col-md-6 text-right mt-3">
                                             <button className="btn btn-dark">Complete Order</button>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +195,47 @@ const Checkout = () => {
                     </div>
                     <div className="col-md-5 cart-info ">
                         <div className="cart-info-holder">
-werereq
+                            <div className="items-holder">
+                                <div className="each-item d-flex justify-content-between align-items-center border-bottom py-3">
+                                    <div className="d-flex align-items-center">
+                                        <span className="item-image">
+                                            <img src="" alt=""></img>
+                                            <span>1</span>
+                                        </span>
+                                        <span>White top</span>
+                                    </div>
+                                    <strong>Rs. 699</strong>
+                                </div>
+                                <div className="each-item d-flex justify-content-between align-items-center border-bottom py-3">
+                                    <div className="d-flex align-items-center">
+                                        <span className="item-image">
+                                            <img src="" alt=""></img>
+                                            <span>1</span>
+                                        </span>
+                                        <span>White top</span>
+                                    </div>
+                                    <strong>Rs. 699</strong>
+                                </div>
+                            </div>
+                            <div className="coupon-holder row py-4 border-bottom">
+                                <div className="col-md-9">
+                                    <input type="text" className="form-control rounded coupon-input" placeholder="Coupon"></input>
+                                </div>
+                                <div className="col-md-3">
+                                    <button className="btn btn-dark">Apply</button>
+                                </div>
+                            </div>
+                            <div className="py-3 border-bottom">
+                                <p className="d-flex justify-content-between mb-0">
+                                    <small>Subtotal</small>
+                                    <strong><small>Rs. 809</small></strong>
+                                </p>
+                                <p className="d-flex justify-content-between mb-0">
+                                    <small>Shipping</small>
+                                    <strong><small>Rs. 809</small></strong>
+                                </p>
+                            </div>
+                            <h5 className="d-flex justify-content-between mb-0 mt-2"><strong>Total</strong><strong>Rs 78787</strong></h5>
                         </div>
                     </div>
                 </div>
