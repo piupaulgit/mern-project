@@ -9,6 +9,7 @@ import Paymentb from "./PaymentB";
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const [reload, setReload] = useState(false);
+  const [totalOrderPrice, setTotalOrderPrice] = useState(0)
   const getProducts = () => {
     setProducts(loadCart());
   };
@@ -16,6 +17,8 @@ const Cart = () => {
   useEffect(() => {
     getProducts();
   }, [reload]);
+
+
 
   const loadProducts = (products) => {
     return (
@@ -99,7 +102,11 @@ const Cart = () => {
           <div className="col-md-6">
               <div className="bg-light p-5">
                 <div className="bg-white p-4">
-                    <h4 className="d-flex justify-content-between">Subtotal <strong className="text-info">3444.00</strong></h4>
+                    <h4 className="d-flex justify-content-between">Subtotal : 
+                    {
+                      products.reduce((total, prod) => total + prod.totalPrice, 0)
+                    }
+                    </h4>
                     <hr></hr>
                     <p className="mb-5"><i>Shipping & taxes calculated at checkout</i></p>
                     <Link to="/checkout" className="btn btn-dark text-uppercase">proceed to checkout</Link>
