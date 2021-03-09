@@ -4,24 +4,26 @@ export const addItemToCart = (item, next) => {
     if (localStorage.getItem("cart")) {
       cart = JSON.parse(localStorage.getItem("cart"));
     }
-    if(cart.length){
-      cart.filter(cartItem => {
-        if(cartItem._id === item._id){
-          cartItem.count += 1
-        }
-        else{
-          cart.push({
-            ...item,
-            count: 1,
-          });
+    let isAlreadyInCart;
+    cart.filter(cartItem => {
+      if(cartItem._id === item._id){
+        isAlreadyInCart =  cartItem._id
+      }
+    });
+    if(isAlreadyInCart){
+      cart.map(cartItm => {
+        if(cartItm._id === isAlreadyInCart){
+          cartItm.count += 1
+          cartItm.totalPrice = cartItm.price*cartItm.count
         }
       })
     }
     else{
       cart.push({
-        ...item,
-        count: 1,
-      });
+                ...item,
+                count: 1,
+                totalPrice: item.price
+              });
     }
   
     
