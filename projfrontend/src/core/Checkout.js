@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/Checkout.scss";
+import { loadCart } from './helper/cartHelper';
+import ImageHelper from './helper/ImageHelper';
 const Checkout = () => {
     const [activeNav, setActiveNav] = useState('information')
+    const [products, setProducts] = useState([]);
+    const [shippingCharge, setShippingCharge] = useState(100)
+    const [enteredCouponCode, setEnteredCpouponCode] = useState('')
+    const validCoupon= "smile";
+    const [couponApplied, setCouponApplied] = useState(false)
     const changeTab = (tabname) => {
         setActiveNav(tabname)
+    }
+    const getProducts = () => {
+        setProducts(loadCart());
+      };
+    
+      useEffect(() => {
+        getProducts();
+      }, []);
+
+    const handleCouponChange = (e) => {
+        setEnteredCpouponCode(e.target.value)
+    }
+    const handleCouponSubmit  = () => {
+        if(enteredCouponCode === validCoupon){
+            setCouponApplied(true)
+            setShippingCharge(0)
+        }
+        else{
+            setCouponApplied(false)
+            setShippingCharge(100)
+        }
     }
     return (
         <div className="checkout">
@@ -166,7 +194,7 @@ const Checkout = () => {
                                                     <small className="text-muted">Method</small>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <small>Standard Shipping:  <b>$10.00</b></small>
+                                                    <small>Standard Shipping:  <b>Rs: {shippingCharge}</b></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,46 +224,56 @@ const Checkout = () => {
                     <div className="col-md-5 cart-info ">
                         <div className="cart-info-holder">
                             <div className="items-holder">
-                                <div className="each-item d-flex justify-content-between align-items-center border-bottom py-3">
-                                    <div className="d-flex align-items-center">
-                                        <span className="item-image">
-                                            <img src="" alt=""></img>
-                                            <span>1</span>
-                                        </span>
-                                        <span>White top</span>
-                                    </div>
-                                    <strong>Rs. 699</strong>
-                                </div>
-                                <div className="each-item d-flex justify-content-between align-items-center border-bottom py-3">
-                                    <div className="d-flex align-items-center">
-                                        <span className="item-image">
-                                            <img src="" alt=""></img>
-                                            <span>1</span>
-                                        </span>
-                                        <span>White top</span>
-                                    </div>
-                                    <strong>Rs. 699</strong>
-                                </div>
+                                {
+                                    products && products.map((item, index) => {
+                                        return (
+                                            <div className="each-item d-flex justify-content-between align-items-center border-bottom py-3" key={item._id}>
+                                                <div className="d-flex align-items-center">
+                                                    <span className="item-image">
+                                                        <ImageHelper product={item}></ImageHelper>
+                                                        <span>{item.count}</span>
+                                                    </span>
+                                                    <span className="text-capitalize">{item.name}</span>
+                                                </div>
+                                                <strong>Rs. {item.totalPrice}</strong>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                             <div className="coupon-holder row py-4 border-bottom">
                                 <div className="col-md-9">
-                                    <input type="text" className="form-control rounded coupon-input" placeholder="Coupon"></input>
+                                    <input type="text" className="form-control rounded coupon-input" value ={enteredCouponCode} placeholder="Coupon" onChange={(e) => handleCouponChange(e)}></input>
+                                    {
+                                        couponApplied && (
+                                            <small className="text-danger smallest-font">Coupon applied.</small>
+                                        )
+                                    }
+                                    {
+                                        !couponApplied && (
+                                            <small className="smallest-font">Use your <strong>"smile"</strong> as a coupon code to exclude shipping charge.</small>
+                                        )
+                                    }
                                 </div>
                                 <div className="col-md-3">
-                                    <button className="btn btn-dark">Apply</button>
+                                    <button className="btn btn-dark" onClick={handleCouponSubmit}>Apply</button>
                                 </div>
                             </div>
                             <div className="py-3 border-bottom">
                                 <p className="d-flex justify-content-between mb-0">
                                     <small>Subtotal</small>
-                                    <strong><small>Rs. 809</small></strong>
+                                    <strong><small> Rs. {
+                                    products.reduce((total, prod) => total + prod.totalPrice, 0)
+                                    }</small></strong>
                                 </p>
                                 <p className="d-flex justify-content-between mb-0">
                                     <small>Shipping</small>
-                                    <strong><small>Rs. 809</small></strong>
+                                    <strong><small>Rs. {shippingCharge}</small></strong>
                                 </p>
                             </div>
-                            <h5 className="d-flex justify-content-between mb-0 mt-2"><strong>Total</strong><strong>Rs 78787</strong></h5>
+                            <h5 className="d-flex justify-content-between mb-0 mt-2"><strong>Total</strong><strong>Rs. {
+                                    products.reduce((total, prod) => total + prod.totalPrice, shippingCharge)
+                                    }</strong></h5>
                         </div>
                     </div>
                 </div>
