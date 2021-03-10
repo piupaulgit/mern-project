@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Base from "./Base";
 import Card from "./Card";
-import { loadCart, removeItemFromCart } from "./helper/cartHelper";
+import { handleCountChange, loadCart, removeItemFromCart } from "./helper/cartHelper";
 import ImageHelper from "./helper/ImageHelper";
 import Paymentb from "./PaymentB";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const [reload, setReload] = useState(false);
-  const [totalOrderPrice, setTotalOrderPrice] = useState(0)
   const getProducts = () => {
     setProducts(loadCart());
   };
@@ -17,6 +16,11 @@ const Cart = () => {
   useEffect(() => {
     getProducts();
   }, [reload]);
+
+  const handleChange = (productId,e) => {
+    handleCountChange(productId,e.target.value);
+    setReload(!reload)
+  };
 
 
 
@@ -38,7 +42,7 @@ const Cart = () => {
                 {item.price}
               </td>
               <td>
-                <input type="number" className="form-control small-input" min="1" value={item.count}></input>
+                <input type="number" className="form-control small-input" min="1" value={item.count} name="count" onChange={(e) => handleChange(item._id,e)}></input>
               </td>
               <td>
               {item.totalPrice} 

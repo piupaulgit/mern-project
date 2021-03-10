@@ -56,3 +56,18 @@ export const removeItemFromCart = (productId) => {
   }
   return cart;
 }
+export const handleCountChange = (productId,count) => {
+  let cart = []
+  if (typeof window !== undefined) {
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    }
+    cart.map((product,index) => {
+      if(product._id === productId)
+        product.count = count
+        product.totalPrice = product.count * product.price
+    })
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  return cart;
+}
