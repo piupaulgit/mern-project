@@ -71,3 +71,28 @@ export const handleCountChange = (productId,count) => {
   }
   return cart;
 }
+
+
+// wishlist
+export const addItemToWishlist = (item,next) => {
+  let cartWishlist = [];
+  if (typeof window !== undefined) {
+    if (localStorage.getItem("cartWishlist")) {
+      cartWishlist = JSON.parse(localStorage.getItem("cart"));
+    }
+    cartWishlist.push({
+      ...item
+    });
+    localStorage.setItem("cartWishlist", JSON.stringify(cartWishlist));
+    next();
+  }
+}
+
+
+export const loadWishlist = () => {
+  if (typeof window !== undefined) {
+    if (localStorage.getItem("cartWishlist")) {
+      return JSON.parse(localStorage.getItem("cartWishlist"));
+    }
+  }
+};

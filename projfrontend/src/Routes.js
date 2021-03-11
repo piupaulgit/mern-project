@@ -17,6 +17,7 @@ import AdminDashboard from "./user/AdminDashboard";
 import SingleProduct from "./core/SingleProduct";
 import Products from "./core/Products";
 import Checkout from "./core/Checkout";
+import Wishlist from "./core/Wishlist";
 
 const Routes = () => {
   return (
@@ -35,6 +36,7 @@ const Routes = () => {
           component={UserDashborad}
         ></PrivateRoute>
         <PrivateRoute path="/cart" exact component={Cart}></PrivateRoute>
+        <PrivateRoute path="/wishlist" exact component={Wishlist}></PrivateRoute>
         <PrivateRoute path="/checkout" exact component={Checkout}></PrivateRoute>
         <AdminRoute
           path="/admin/dashboard"
