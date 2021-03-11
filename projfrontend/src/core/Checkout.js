@@ -246,7 +246,7 @@ const Checkout = () => {
                                     <input type="text" className="form-control rounded coupon-input" value ={enteredCouponCode} placeholder="Coupon" onChange={(e) => handleCouponChange(e)}></input>
                                     {
                                         couponApplied && (
-                                            <small className="text-danger smallest-font">Coupon applied.</small>
+                                            <small className="text-danger smallest-font">Coupon applied. Shipping charge deducted.</small>
                                         )
                                     }
                                     {
