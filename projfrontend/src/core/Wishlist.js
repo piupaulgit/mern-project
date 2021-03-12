@@ -8,13 +8,14 @@ import { loadWishlist } from "./helper/cartHelper";
 const Wishlist = () => {
     const [wishlist, setWishlist] = useState([])
     const [categories , setCategories] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         getCategories().then(res => {
             setCategories(res)
         })
         setWishlist(loadWishlist());
-    }, [])
+    }, [reload])
     return (
         <div className="wishlist">
              <Base title="Wishlist">

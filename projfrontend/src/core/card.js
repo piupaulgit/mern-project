@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ImageHelper from "./helper/ImageHelper";
-import { addItemToCart, addItemToWishlist, removeItemFromCart } from "./helper/cartHelper";
+import { addItemToCart, addItemToWishlist, removeItemFromCart, removeItemFromWishlist } from "./helper/cartHelper";
 import { Link, Redirect } from "react-router-dom";
 import '../styles/ProductCard.scss';
 
@@ -54,7 +54,7 @@ const Card = ({ product, addtoCart = true, addToWishList = true, removeFromWishL
   const showRemoveFromWishList = () => {
     return (
       removeFromWishList && (
-        <button className="btn btn-danger text-light" onClick={addProductInWishlist}>
+        <button className="btn btn-danger text-light" onClick={() => {removeItemFromWishlist(product._id); setReload(!reload)}}>
           <svg id="Capa_1" className="heartBreak" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m475.327 76.053c-48.897-48.897-128.174-48.897-177.071 0l-2.819 2.83-25.709 70.077 68.408 57.786-81.074 103.546h-1.062l10.84-75.448-77.577-77.577 34.646-71.008-10.166-10.206c-48.897-48.897-128.174-48.897-177.071 0s-48.897 128.174 0 177.071l219.328 219.496 219.327-219.496c48.897-48.897 48.897-128.175 0-177.071z"/></g>
           </svg>
         </button>

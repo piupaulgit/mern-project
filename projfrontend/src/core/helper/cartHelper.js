@@ -96,3 +96,19 @@ export const loadWishlist = () => {
     }
   }
 };
+
+export const removeItemFromWishlist = (productId) => {
+  let cartWishlist = []
+  if (typeof window !== undefined) {
+    if (localStorage.getItem("cartWishlist")) {
+      cartWishlist = JSON.parse(localStorage.getItem("cartWishlist"));
+    }
+    cartWishlist.map((product,index) => {
+      if(product._id === productId)(
+        cartWishlist.splice(index, 1)
+      )
+    })
+    localStorage.setItem("cartWishlist", JSON.stringify(cartWishlist));
+  }
+  return cartWishlist;
+}
