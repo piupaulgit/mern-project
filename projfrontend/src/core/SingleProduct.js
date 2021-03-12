@@ -73,15 +73,12 @@ const SingleProduct = () => {
                             <h4>{productDetail.name}</h4>
                             <strong>Price: ₹ {productDetail.price}</strong>
                             <p className="pt-2">{productDetail.description}</p>
-                            <strong>Category: Need to work</strong>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <div className="form-group mt-3 mb-0">
-                                        <label><small>Quantity</small></label>
-                                        <input type="number" className="form-control" value="0"></input>
-                                    </div>
-                                </div>
-                            </div>
+                            <strong className="text-capitalize">Category:  
+                                {
+                                    categories && categories.filter(item => item._id === productDetail.category ? setProductDetail({...productDetail,category:item.name}) : '')
+                                }
+                                &nbsp;{productDetail.category}
+                            </strong>
                             <div className="mt-4">
                                 <button className="btn btn-yellow mr-3">Add to Card</button>
                                 <button className="btn btn-danger">Add to Wishlist</button>
