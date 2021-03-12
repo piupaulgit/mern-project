@@ -190,3 +190,9 @@ select {
 .cart-table td {
   vertical-align: middle;
 }
+
+.heartBreak {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}

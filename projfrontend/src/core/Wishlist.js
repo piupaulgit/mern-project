@@ -28,7 +28,7 @@ const Wishlist = () => {
                                 {wishlist && wishlist.map((product, index) => {
                                     return (
                                         <div className="col-md-4" key={index}>
-                                            <Card product={product} addToWishList={false}></Card>
+                                            <Card product={product} addToWishList={false} removeFromWishList={true}></Card>
                                         </div>
                                     )
                                 })}
