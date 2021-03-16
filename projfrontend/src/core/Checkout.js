@@ -1,7 +1,8 @@
+import { event } from 'jquery';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/Checkout.scss";
-import { loadCart } from './helper/cartHelper';
+import { handleCountChange, loadCart } from './helper/cartHelper';
 import ImageHelper from './helper/ImageHelper';
 const Checkout = () => {
     const [activeNav, setActiveNav] = useState('information')
@@ -10,6 +11,16 @@ const Checkout = () => {
     const [enteredCouponCode, setEnteredCpouponCode] = useState('')
     const validCoupon= "smile";
     const [couponApplied, setCouponApplied] = useState(false)
+    const [userInfo, setUserInfo] = useState({
+        contactNumber: null,
+        firstName: '',
+        lastName: '',
+        address: '',
+        apartment: '',
+        state: '',
+        city: '',
+        zip: null
+    })
     const changeTab = (tabname) => {
         setActiveNav(tabname)
     }
@@ -33,6 +44,9 @@ const Checkout = () => {
             setCouponApplied(false)
             setShippingCharge(100)
         }
+    }
+    const handleChange = (name) => event => {
+        setUserInfo({...userInfo,[name]:event.target.value})
     }
     return (
         <div className="checkout">
@@ -62,7 +76,12 @@ const Checkout = () => {
                                     <div className={`tabContent ${activeNav === 'information' ? 'active' : ''}`} >
                                         <h6 className="font-weight-light">Contact information</h6>
                                         <div className="form-group mb-4">
-                                            <input type="tell" className="form-control rounded rounded" placeholder="Mobile Number"/>
+                                            <input type="tell" 
+                                            className="form-control rounded rounded" 
+                                            value={userInfo.contactNumber}
+                                            name="contactNumber"
+                                            onChange={handleChange("contactNumber")}
+                                            placeholder="Mobile Number" />
                                             <label>
                                                 <input type="checkbox" className="mr-2"></input>
                                                 <small>Keep me up to date on news and exclusive offers</small>
@@ -72,22 +91,38 @@ const Checkout = () => {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <input type="text" placeholder="First Name" className="form-control rounded"></input>
+                                                    <input type="text" 
+                                                    value={userInfo.firstName}
+                                                    name="firstName"
+                                                    onChange={handleChange("firstName")}
+                                                    placeholder="First Name" className="form-control rounded"></input>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <input type="text" placeholder="Last Name" className="form-control rounded"></input>
+                                                    <input type="text" 
+                                                    value={userInfo.lastName}
+                                                    name="lastName"
+                                                    onChange={handleChange("lastName")}
+                                                    placeholder="Last Name" className="form-control rounded"></input>
                                                 </div>
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="form-group">
-                                                    <textarea className="form-control rounded" placeholder="Address"></textarea>
+                                                    <textarea className="form-control rounded"
+                                                    value={userInfo.address}
+                                                    name="address"
+                                                    onChange={handleChange("address")}
+                                                     placeholder="Address"></textarea>
                                                 </div>
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="form-group">
-                                                    <input type="text" className="form-control rounded" placeholder="Apartment,Suit, etc (optional)"></input>
+                                                    <input type="text"
+                                                    value={userInfo.apartment}
+                                                    name="apartment"
+                                                    onChange={handleChange("apartment")}
+                                                     className="form-control rounded" placeholder="Apartment,Suit, etc (optional)"></input>
                                                 </div>
                                             </div>
                                             <div className="col-md-4">
@@ -125,7 +160,7 @@ const Checkout = () => {
                                                     <small className="text-muted">Contact</small>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <small>+91 89898 98989</small>
+                                                    <small>{userInfo.contactNumber}</small>
                                                 </div>
                                                 <div className="col-md-3">
                                                     <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
@@ -137,7 +172,7 @@ const Checkout = () => {
                                                     <small className="text-muted">Shipping</small>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <small>N.C ROAD, SUBHASNAGAR SOUTH, PANIHATI, NTH 24PGS, 700111 GHOLA WB, India</small>
+                                                    <small>{userInfo.address}</small>
                                                 </div>
                                                 <div className="col-md-3">
                                                     <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
