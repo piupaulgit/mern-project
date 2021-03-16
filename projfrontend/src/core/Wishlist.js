@@ -33,6 +33,14 @@ const Wishlist = () => {
                                         </div>
                                     )
                                 })}
+                                {
+                                    wishlist.length === 0 && 
+                                    <div className="col-md-12">
+                                        <div className="alert alert-danger">
+                                            There is no item in your wishlist.
+                                        </div>
+                                    </div>
+                                }
                             </div>
                          </div>
                      </div>

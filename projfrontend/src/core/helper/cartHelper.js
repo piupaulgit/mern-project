@@ -78,11 +78,19 @@ export const addItemToWishlist = (item,next) => {
   let cartWishlist = [];
   if (typeof window !== undefined) {
     if (localStorage.getItem("cartWishlist")) {
-      cartWishlist = JSON.parse(localStorage.getItem("cart"));
+      cartWishlist = JSON.parse(localStorage.getItem("cartWishlist"));
     }
-    cartWishlist.push({
-      ...item
+    let isAlreadyInwishlist;
+    cartWishlist.filter(wishlistItem => {
+      if(wishlistItem._id === item._id){
+        isAlreadyInwishlist =  wishlistItem._id
+      }
     });
+    if(!isAlreadyInwishlist){
+      cartWishlist.push({
+        ...item,
+      });
+    }
     localStorage.setItem("cartWishlist", JSON.stringify(cartWishlist));
     next();
   }

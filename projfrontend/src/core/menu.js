@@ -15,8 +15,14 @@ const Menu = ({ history }) => {
   const [totalCartVal, setTotalCartVal] = useState('0')
   const [totalWishlistVal, setTotalWishlistVal] = useState('0')
   useEffect(() => {
-    setTotalCartVal(loadCart().length)
-    setTotalWishlistVal(loadWishlist().length)
+    if(loadCart()){
+      setTotalCartVal(loadCart().length)
+    }
+    if(loadWishlist()){
+      setTotalWishlistVal(loadWishlist().length)
+    }
+    
+    
   },[])
   return (
     <div className="menu">
