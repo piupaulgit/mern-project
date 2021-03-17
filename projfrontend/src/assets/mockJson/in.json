@@ -1,0 +1,13 @@
+[
+    {
+        "state": "Arunachal Pradesh",
+        "cities": ["Tawang","Itanagar","Ziro","Bomdila","Pasighat","Bhalukpong"]
+    },{
+        "state": "Karnataka",
+        "cities": ["Bengaluru","Hubli-Dharwad","Mysuru","Kalaburagi", "Mangaluru","Belagavi","Davanagere"]
+    },
+    {
+        "state":"West Bangal",
+        "cities": ["Kolkata","Nadia","Howrah"]
+    }
+]
