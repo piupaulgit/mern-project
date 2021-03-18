@@ -45,7 +45,7 @@ const Cart = () => {
                 <input type="number" className="form-control small-input" min="1" value={item.count} name="count" onChange={(e) => handleChange(item._id,e)}></input>
               </td>
               <td>
-              item.totalPrice
+              {item.totalPrice}
               </td>
               <td>
                   <button className="btn btn-light" onClick={() => {removeItemFromCart(item._id); setReload(!reload)}}>
