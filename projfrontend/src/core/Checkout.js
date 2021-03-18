@@ -61,6 +61,7 @@ const Checkout = () => {
     const handleChange = (name) => event => {
         setUserInfo({...userInfo,[name]:event.target.value})
         console.log(userInfo)
+        console.log(stateAndCities,userInfo.state)
     }
     return (
         <div className="checkout">
@@ -145,7 +146,7 @@ const Checkout = () => {
                                                     value={userInfo.state}
                                                     name="state"
                                                     onChange={handleChange("state")}>
-                                                        <option>State</option>
+                                                        <option>Select State</option>
                                                         {
                                                             stateAndCities && stateAndCities.map((state,index) => {
                                                                 return (<option key={index}>{state.state}</option>)
@@ -157,10 +158,9 @@ const Checkout = () => {
                                             <div className="col-md-4">
                                                 <div className="form-group">
                                                     <select className="form-control rounded">
-                                                        <option>City</option>
+                                                        <option>Select City</option>
                                                         {
-                                                            userInfo.state && stateAndCities[userInfo.state] && stateAndCities[userInfo.state].cities.map((city,index) => {
-                                                                debugger
+                                                           userInfo.state && stateAndCities.filter(item => item.state === userInfo.state)[0].cities.map((city,index) => {
                                                                 return( <option key={index}>{city}</option>)
                                                             })
                                                         }
