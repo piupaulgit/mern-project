@@ -60,8 +60,10 @@ const Checkout = () => {
     }
     const handleChange = (name) => event => {
         setUserInfo({...userInfo,[name]:event.target.value})
+    }
+    const processed = () => {
         console.log(userInfo)
-        console.log(stateAndCities,userInfo.state)
+        changeTab('shipping')
     }
     return (
         <div className="checkout">
@@ -157,7 +159,10 @@ const Checkout = () => {
                                             </div>
                                             <div className="col-md-4">
                                                 <div className="form-group">
-                                                    <select className="form-control rounded">
+                                                    <select className="form-control rounded" 
+                                                     value={userInfo.city}
+                                                     name="city"
+                                                     onChange={handleChange("city")}>
                                                         <option>Select City</option>
                                                         {
                                                            userInfo.state && stateAndCities.filter(item => item.state === userInfo.state)[0].cities.map((city,index) => {
@@ -169,14 +174,19 @@ const Checkout = () => {
                                             </div>
                                             <div className="col-md-4">
                                                 <div className="form-group">
-                                                    <input type="text" placeholder="ZIP" className="form-control rounded"></input>
+                                                    <input type="text" 
+                                                     value={userInfo.zip}
+                                                     name="zip"
+                                                     onChange={handleChange("zip")}
+                                                    placeholder="ZIP" 
+                                                    className="form-control rounded"></input>
                                                 </div>
                                             </div>
                                             <div className="col-md-6  mt-3">
                                                 <Link to="/cart"><small className="text-capitalize">Return to cart</small></Link>
                                             </div>
                                             <div className="col-md-6 text-right mt-3">
-                                                <button className="btn btn-dark"  onClick={() => changeTab('shipping')}>Continue to Shipping</button>
+                                                <button className="btn btn-dark"  onClick={processed}>Continue to Shipping</button>
                                             </div>
                                         </div>
                                     </div>
@@ -276,7 +286,7 @@ const Checkout = () => {
                                             <Link><small className="text-capitalize"  onClick={() => changeTab('shipping')}>Return to Shipping</small></Link>
                                         </div>
                                         <div className="col-md-6 text-right mt-3">
-                                            <button className="btn btn-dark">Complete Order</button>
+                                            <button className="btn btn-dark">Place Order</button>
                                         </div>
                                     </div>
                                     </div>
