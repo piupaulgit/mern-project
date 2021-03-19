@@ -12,8 +12,11 @@
 }
 .top-header--nav li .nav-link {
   padding: 3px 10px;
+  font-size: 14px !important;
 }
-
+.nav-link {
+  font-size: 14px !important;
+}
 .top-header--nav li .nav-link span {
   margin-right: 5px;
   display: inherit;
@@ -40,4 +43,27 @@
   position: absolute;
   top: 1px;
   left: 18px;
+}
+.nav-item.dropdown {
+  position: relative;
+  padding-right: 12px;
+}
+.nav-item.dropdown:after {
+  height: 5px;
+  width: 5px;
+  border-top: 2px solid #a5a0a0;
+  border-right: 2px solid #a5a0a0;
+  transform: rotate(135deg) translateY(25%);
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: 50%;
+}
+.dropdown-menu {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 1px 2px 2px 0px #e0d9d9;
+}
+.dropdown-menu a {
+  font-size: 13px;
 }

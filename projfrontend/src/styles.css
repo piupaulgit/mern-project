@@ -196,3 +196,9 @@ select {
   height: 16px;
   fill: #fff;
 }
+
+.order-placed {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}

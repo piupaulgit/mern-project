@@ -18,6 +18,7 @@ import SingleProduct from "./core/SingleProduct";
 import Products from "./core/Products";
 import Checkout from "./core/Checkout";
 import Wishlist from "./core/Wishlist";
+import OrderPlaced from "./core/OrderPlaced";
 
 const Routes = () => {
   return (
@@ -38,6 +39,7 @@ const Routes = () => {
         <PrivateRoute path="/cart" exact component={Cart}></PrivateRoute>
         <PrivateRoute path="/wishlist" exact component={Wishlist}></PrivateRoute>
         <PrivateRoute path="/checkout" exact component={Checkout}></PrivateRoute>
+        <PrivateRoute path="/order-placed" exact component={OrderPlaced}></PrivateRoute>
         <AdminRoute
           path="/admin/dashboard"
           exact

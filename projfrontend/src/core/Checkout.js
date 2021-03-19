@@ -1,6 +1,7 @@
 import { event } from 'jquery';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { isAuthenticated } from '../auth/helper';
 import "../styles/Checkout.scss";
 import { handleCountChange, loadCart } from './helper/cartHelper';
 import ImageHelper from './helper/ImageHelper';
@@ -24,6 +25,7 @@ const Checkout = () => {
     const [enteredCouponCode, setEnteredCpouponCode] = useState('')
     const validCoupon= "smile";
     const [couponApplied, setCouponApplied] = useState(false)
+    const { user, token } = isAuthenticated();
     const [userInfo, setUserInfo] = useState({
         contactNumber: null,
         firstName: '',
@@ -64,6 +66,9 @@ const Checkout = () => {
     const processed = () => {
         console.log(userInfo)
         changeTab('shipping')
+    }
+    const placeOrder = () => {
+        
     }
     return (
         <div className="checkout">
@@ -286,7 +291,7 @@ const Checkout = () => {
                                             <Link><small className="text-capitalize"  onClick={() => changeTab('shipping')}>Return to Shipping</small></Link>
                                         </div>
                                         <div className="col-md-6 text-right mt-3">
-                                            <button className="btn btn-dark">Place Order</button>
+                                            <button className="btn btn-dark" onClick={placeOrder}>Place Order</button>
                                         </div>
                                     </div>
                                     </div>

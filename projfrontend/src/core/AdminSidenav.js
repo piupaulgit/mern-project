@@ -13,9 +13,9 @@ const AdminSidenav = () => {
     return (
         <div className="admin-sidenav">
             <div className="sidenav">
-                <a className="navbar-brand text-center d-block py-3 bg-light mr-0" href="#">
+                <Link className="navbar-brand text-center d-block py-3 bg-light mr-0" to="/">
                     <img src={logo} alt></img>
-                </a> 
+                </Link> 
                 <h5>Admin Menus</h5>
                 <ul className="list-group">
                     <li className="list-group-item">

@@ -96,9 +96,9 @@ const Menu = ({ history }) => {
         </ul>
       </div>
         <nav className="navbar navbar-expand-sm">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           <img src={logo} alt></img>
-        </a>
+        </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -113,10 +113,15 @@ const Menu = ({ history }) => {
               About Us
             </Link>
           </li>
-          <li className="nav-item">
-          <Link to="/" className="nav-link" style={currentLink(history, "/categories",  "#bada55", "#333")}>
+          <li className="nav-item dropdown">
+            <Link  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="nav-link" style={currentLink(history, "/categories",  "#bada55", "#333")}>
               Categories
             </Link>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </li>
           <li className="nav-item">
           <Link to="/products" className="nav-link" style={currentLink(history, "/products",  "#bada55", "#333")}>

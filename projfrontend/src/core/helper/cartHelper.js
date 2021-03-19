@@ -120,3 +120,12 @@ export const removeItemFromWishlist = (productId) => {
   }
   return cartWishlist;
 }
+
+
+// empty cart after order placed
+export const emptyCart = next => {
+  if (typeof window !== undefined) {
+    localStorage.removeItem('cart');
+    next()
+  }
+}
