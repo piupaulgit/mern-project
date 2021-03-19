@@ -125,7 +125,7 @@ export const removeItemFromWishlist = (productId) => {
 // empty cart after order placed
 export const emptyCart = next => {
   if (typeof window !== undefined) {
-    localStorage.removeItem('cart');
+    localStorage.setItem('cart', [])
     next()
   }
 }

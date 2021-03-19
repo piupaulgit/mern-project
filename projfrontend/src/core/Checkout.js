@@ -5,6 +5,7 @@ import { isAuthenticated } from '../auth/helper';
 import "../styles/Checkout.scss";
 import { handleCountChange, loadCart } from './helper/cartHelper';
 import ImageHelper from './helper/ImageHelper';
+import { createOrder } from './helper/OrderHelper';
 const stateAndCities = [
     {
         "state": "Arunachal Pradesh",
@@ -68,7 +69,14 @@ const Checkout = () => {
         changeTab('shipping')
     }
     const placeOrder = () => {
-        
+        const order = {
+            products: products,
+            transactionId : Date.now(),
+            amount: products.reduce((total, prod) => total + prod.totalPrice, shippingCharge)
+        }
+        createOrder(user._id,token,order).then(response => {
+            console.log(response)
+        })
     }
     return (
         <div className="checkout">
