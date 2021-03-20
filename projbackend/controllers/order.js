@@ -15,16 +15,17 @@ exports.getOrderById = (req, res, next, id) => {
 };
 
 exports.createOrder = (req, res) => {
-  req.body.order.user = req.profile;
-  const order = new Order(req.body.order);
-  order.save((err, order) => {
-    if (err) {
-      return res.status(400).json({
-        error: "fail to add order",
-      });
-    }
-    res.json(order);
-  });
+  res.send('uyi')
+  // req.body.order.user = req.profile;
+  // const order = new Order(req.body.order);
+  // order.save((err, order) => {
+  //   if (err) {
+  //     return res.status(400).json({
+  //       error: "fail to add order",
+  //     });
+  //   }
+  //   res.json(order);
+  // });
 };
 
 // get all orders
