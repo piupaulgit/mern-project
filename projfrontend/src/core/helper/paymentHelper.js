@@ -11,10 +11,9 @@ export const getMeToken = (userId, token) => {
   })
     .then((response) => {
       return response.json();
-      console.log("opopopopopopopiii");
     })
     .catch((err) => {
-      console.log(err, "opopopopopopop");
+      console.log(err);
     });
 };
 
