@@ -161,9 +161,11 @@ select {
   text-transform: capitalize;
   font-size: 13px;
 }
+
 .category-link:last-child {
   border: 0;
 }
+
 .category-link:hover {
   text-decoration: none;
   background-color: #f1f1f1;
@@ -187,6 +189,7 @@ select {
 .cart-table a:hover {
   text-decoration: none;
 }
+
 .cart-table td {
   vertical-align: middle;
 }
