@@ -1,5 +1,6 @@
 const { Order, ProductCart } = require("../models/order");
 
+// params
 exports.getOrderById = (req, res, next, id) => {
   Order.findById(id)
     .populate("products.product", " name price")
@@ -14,18 +15,18 @@ exports.getOrderById = (req, res, next, id) => {
     });
 };
 
+// routes
 exports.createOrder = (req, res) => {
-  res.send('uyi')
-  // req.body.order.user = req.profile;
-  // const order = new Order(req.body.order);
-  // order.save((err, order) => {
-  //   if (err) {
-  //     return res.status(400).json({
-  //       error: "fail to add order",
-  //     });
-  //   }
-  //   res.json(order);
-  // });
+  req.body.order.user = req.profile;
+  const order = new Order(req.body.order);
+  order.save((err, order) => {
+    if (err) {
+      return res.status(400).json({
+        error: "fail to add order",
+      });
+    }
+    res.json(order);
+  });
 };
 
 // get all orders
