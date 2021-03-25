@@ -145,22 +145,24 @@ exports.getAllproducts = (req, res) => {
 };
 
 // update product stock and sold count
+
 exports.updateStock = (req, res, next) => {
-  myOperations = req.body.order.products.map((prod) => {
+  let myOperations = req.body.order.products.map(prod => {
     return {
       updateOne: {
         filter: { _id: prod._id },
-        update: { $inc: { stock: -prod.count, sold: +prod.count } },
-      },
-    };
-    product.bulkWrite(myOperations, {}, (err, products) => {
-      if (err) {
-        return res.status(400).json({
-          error: "bulk operation failed",
-        });
+        update: { $inc: { stock: -prod.count, sold: +prod.count } }
       }
-      next();
-    });
+    };
+  });
+
+  Product.bulkWrite(myOperations, {}, (err, products) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Bulk operation failed"
+      });
+    }
+    next();
   });
 };
 
