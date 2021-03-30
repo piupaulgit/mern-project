@@ -23,8 +23,12 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    mobile:{
+      type: Number,
+      required: true
+    },
     status: {
-      type: String,
+      type: String, 
       default: "received",
       enum: ["received", "inprocess", "shipped", "delivered", "cancelled"],
     },
