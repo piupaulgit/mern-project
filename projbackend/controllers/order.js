@@ -21,8 +21,9 @@ exports.createOrder = (req, res) => {
   const order = new Order(req.body.order);
   order.save((err, order) => {
     if (err) {
+      console.log(err)
       return res.status(400).json({
-        error: "fail to add order",
+        error: "fail to add order in the DB",
       });
     }
     res.json(order);
