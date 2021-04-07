@@ -79,7 +79,7 @@ const Checkout = () => {
         }
         console.log(order)
         createOrder(user._id,token,order).then(response => {
-            console.log(response)
+            console.log(response,'response')
         })
     }
     return (
