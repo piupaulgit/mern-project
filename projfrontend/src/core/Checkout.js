@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import "../styles/Checkout.scss";
-import { handleCountChange, loadCart } from './helper/cartHelper';
+import { emptyCart, handleCountChange, loadCart } from './helper/cartHelper';
 import ImageHelper from './helper/ImageHelper';
 import { createOrder } from './helper/OrderHelper';
 const stateAndCities = [
@@ -85,6 +85,7 @@ const Checkout = () => {
         createOrder(user._id,token,order).then(response => {
             console.log(response,'response')
             setOrderDetail({...orderDetail, id: response._id, status: response.status})
+            emptyCart()
         })
     }
 
