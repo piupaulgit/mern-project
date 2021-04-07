@@ -86,7 +86,7 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                  {products.length > 0 ? (
+                  {products?.length > 0 ? (
                     loadProducts(products)
                   ) : (
                     <tr>
@@ -108,7 +108,7 @@ const Cart = () => {
                 <div className="bg-white p-4">
                     <h4 className="d-flex justify-content-between">Subtotal : 
                     {
-                      products.reduce((total, prod) => total + prod.totalPrice, 0)
+                      products?.reduce((total, prod) => total + prod.totalPrice, 0)
                     }
                     </h4>
                     <hr></hr>
