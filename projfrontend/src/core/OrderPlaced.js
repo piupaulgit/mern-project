@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const OrderPlaced = () => {
+    const orderId = useParams().id;
     return (
         <div className="order-placed">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-6 mx-auto text-center">
-                        <h4>Your order has been successfully placed.</h4>
+                        <h4>Your order has been successfully placed. Order id: {orderId}</h4>
                         <Link to="/" className="btn btn-yellow">Continue Shopping</Link>
                     </div>
                 </div>

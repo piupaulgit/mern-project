@@ -1,6 +1,6 @@
 import { event } from 'jquery';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import "../styles/Checkout.scss";
 import { handleCountChange, loadCart } from './helper/cartHelper';
@@ -27,6 +27,10 @@ const Checkout = () => {
     const validCoupon= "smile";
     const [couponApplied, setCouponApplied] = useState(false)
     const { user, token } = isAuthenticated();
+    const [orderDetail, setOrderDetail] = useState({
+        id: '',
+        status: '',
+    })
     const [userInfo, setUserInfo] = useState({
         contactNumber: null,
         firstName: '',
@@ -74,13 +78,20 @@ const Checkout = () => {
             products: products,
             transactionId : Date.now(),
             amount: products.reduce((total, prod) => total + prod.totalPrice, shippingCharge),
-            address: userInfo.address,
+            name: `${userInfo.firstName} ${userInfo.lastName}`,
+            address: `${userInfo.address}, ${userInfo.apartment}, ${userInfo.state}, ${userInfo.city}, ${userInfo.zip}`,
             mobile: userInfo.contactNumber
         }
-        console.log(order)
         createOrder(user._id,token,order).then(response => {
             console.log(response,'response')
+            setOrderDetail({...orderDetail, id: response._id, status: response.status})
         })
+    }
+
+    const performRedirect = () => {
+        if(orderDetail.id){
+          return <Redirect to={`/order-placed/${orderDetail.id}`}></Redirect>
+        }
     }
     return (
         <div className="checkout">
@@ -304,6 +315,7 @@ const Checkout = () => {
                                         </div>
                                         <div className="col-md-6 text-right mt-3">
                                             <button className="btn btn-dark" onClick={placeOrder}>Place Order</button>
+                                            {performRedirect()}
                                         </div>
                                     </div>
                                     </div>
