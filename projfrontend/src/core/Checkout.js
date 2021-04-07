@@ -63,6 +63,7 @@ const Checkout = () => {
     }
     const handleChange = (name) => event => {
         setUserInfo({...userInfo,[name]:event.target.value})
+        console.log(userInfo)
     }
     const processed = () => {
         console.log(userInfo)
@@ -72,8 +73,11 @@ const Checkout = () => {
         const order = {
             products: products,
             transactionId : Date.now(),
-            amount: products.reduce((total, prod) => total + prod.totalPrice, shippingCharge)
+            amount: products.reduce((total, prod) => total + prod.totalPrice, shippingCharge),
+            address: userInfo.address,
+            mobile: userInfo.contactNumber
         }
+        console.log(order)
         createOrder(user._id,token,order).then(response => {
             console.log(response)
         })
@@ -256,7 +260,7 @@ const Checkout = () => {
                                                     <small className="text-muted">Contact</small>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <small>+91 89898 98989</small>
+                                                    <small>{userInfo.contactNumber}</small>
                                                 </div>
                                                 <div className="col-md-3">
                                                     <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
@@ -268,7 +272,7 @@ const Checkout = () => {
                                                     <small className="text-muted">Shipping</small>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <small>N.C ROAD, SUBHASNAGAR SOUTH, PANIHATI, NTH 24PGS, 700111 GHOLA WB, India</small>
+                                                    <small>{userInfo.address}</small>
                                                 </div>
                                                 <div className="col-md-3">
                                                     <small><Link  onClick={() => changeTab('information')}>Change</Link></small>
