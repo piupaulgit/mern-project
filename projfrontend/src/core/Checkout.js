@@ -21,6 +21,7 @@ const stateAndCities = [
 ]
 const Checkout = () => {
     const [activeNav, setActiveNav] = useState('information')
+    const [isContinueToshippingDisabled, setIsContinueShippingDisabled] = useState(true)
     const [products, setProducts] = useState([]);
     const [shippingCharge, setShippingCharge] = useState(100)
     const [enteredCouponCode, setEnteredCpouponCode] = useState('')
@@ -67,7 +68,12 @@ const Checkout = () => {
     }
     const handleChange = (name) => event => {
         setUserInfo({...userInfo,[name]:event.target.value})
-        console.log(userInfo)
+        if(userInfo.firstName && userInfo.lastName && userInfo.contactNumber && userInfo.address && userInfo.state && userInfo.city && userInfo.zip){
+            setIsContinueShippingDisabled(false)
+        }
+        else{
+            setIsContinueShippingDisabled(true)
+        }
     }
     const processed = () => {
         console.log(userInfo)
@@ -215,7 +221,7 @@ const Checkout = () => {
                                                 <Link to="/cart"><small className="text-capitalize">Return to cart</small></Link>
                                             </div>
                                             <div className="col-md-6 text-right mt-3">
-                                                <button className="btn btn-dark"  onClick={processed}>Continue to Shipping</button>
+                                                <button className="btn btn-dark"  onClick={processed} disabled={isContinueToshippingDisabled}>Continue to Shipping</button>
                                             </div>
                                         </div>
                                     </div>
