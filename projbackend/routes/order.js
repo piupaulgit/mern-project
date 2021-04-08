@@ -28,7 +28,7 @@ router.post(
 
 // get all orders
 router.get(
-  "order/all/:userId",
+  "/order/all/:userId",
   isSignedIn,
   isAuthenticated,
   isAdmin,
