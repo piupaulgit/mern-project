@@ -19,6 +19,7 @@ import Products from "./core/Products";
 import Checkout from "./core/Checkout";
 import Wishlist from "./core/Wishlist";
 import OrderPlaced from "./core/OrderPlaced";
+import ManageOrders from "./admin/ManageOrders";
 
 const Routes = () => {
   return (
@@ -69,6 +70,11 @@ const Routes = () => {
           path="/admin/categories"
           exact
           component={ManageCategory}
+        ></AdminRoute>
+        <AdminRoute
+          path="/admin/orders"
+          exact
+          component={ManageOrders}
         ></AdminRoute>
       </Switch>
     </BrowserRouter>

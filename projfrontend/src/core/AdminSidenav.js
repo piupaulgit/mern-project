@@ -28,7 +28,7 @@ const AdminSidenav = () => {
                         <Link to="/admin/products" style={currentLink(history,'/admin/products')}>Manage Products</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/products" style={currentLink(history,'/admin/orders')}>Manage Orders</Link>
+                        <Link to="/admin/orders" style={currentLink(history,'/admin/orders')}>Manage Orders</Link>
                     </li>
                     <li className="pl-3 pt-5">
                     <button
