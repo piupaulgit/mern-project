@@ -18,6 +18,7 @@ const ManageOrders = () => {
 
     const openModal = (ordr) => {
         setCurrentOrder(ordr)
+        console.log(currentOrder)
     }
     return (
         <AdminBase title="Manage Orders">
@@ -93,7 +94,33 @@ const ManageOrders = () => {
                             </button>
                         </div>
                             <div className="modal-body">
-                                <p><strong>Order ID: </strong>{currentOrder._id}</p>
+                                <p className="text-sm mb-0"><strong>Order ID: </strong>{currentOrder._id}</p>
+                                <p className="text-sm mb-0"><strong>Order From:  </strong>{currentOrder?.name}</p>
+                                <p className="text-sm mb-0"><strong>Email:  </strong>{currentOrder?.user?.name}</p>
+                                <p className="text-sm mb-0"><strong>Mobile:  </strong>{currentOrder.mobile}</p>
+                                <p className="text-sm"><strong>Address:  </strong>{currentOrder.address}</p>
+                                <table className="table border">
+                                    <thead>
+                                        <tr>
+                                            <th className="text-sm">Product Name</th>
+                                            <th className="text-sm">Quantity</th>
+                                            <th className="text-sm">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                        currentOrder?.products?.map((pro,index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td className='text-sm'>{pro.name}</td>
+                                                    <td className='text-sm'>{pro.count}</td>
+                                                    <td className='text-sm'>{pro.price}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
