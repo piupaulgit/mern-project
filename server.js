@@ -17,7 +17,7 @@ const paymentBRoute = require("./routes/payment");
 // db connection
 mongoose.set('useFindAndModify', false);
 mongoose
-  .connect(process.env.DATABASE, {
+  .connect(process.env.DATABASE ||  "mongodb://localhost:27017/mernDb" , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
