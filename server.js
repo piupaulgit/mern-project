@@ -45,6 +45,10 @@ app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", paymentBRoute);
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'))
+}
+
 // starting server
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
