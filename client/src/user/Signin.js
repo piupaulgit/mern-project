@@ -97,6 +97,16 @@ const Signin = () => {
   return (
     <Base title="Login to Your Account">
       <div className="container">
+        <div className="row">
+          
+        <div className="col-md-5 mx-auto alert alert-info mb-0">
+            <div className=" p-2 ">
+              <small>Below is a dummy credential with Admin authorization. We can login with this details or feel free to create a new account in the sign up page.</small>
+              <p className="mb-0 mt-3 text-lowercase"><b>Email:</b> piu@test.com</p>
+              <p><b>Password: </b> 123456</p>
+            </div>
+          </div>
+        </div>
         <div className="row py-5">
           <div className="col-md-12">
             <div className="row">
