@@ -113,16 +113,6 @@ const Menu = ({ history }) => {
               About Us
             </Link>
           </li>
-          <li className="nav-item dropdown">
-            <Link  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="nav-link" style={currentLink(history, "/categories",  "#bada55", "#333")}>
-              Categories
-            </Link>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
           <li className="nav-item">
           <Link to="/products" className="nav-link" style={currentLink(history, "/products",  "#bada55", "#333")}>
               Products
